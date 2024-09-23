@@ -1,0 +1,33 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: rm-service-registry
+
+rm:
+  serviceRegistry:
+    username: serviceregistry
+    password: vento123
+  rpgmakerBack:
+    username: rmrpgmakerback
+    password: vento123
+  contentBack:
+    username: rmcontentback
+    password: vento123
+
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://${rm.serviceRegistry.username}:${rm.serviceRegistry.password}@localhost:8761/eureka'
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    hostname: localhost
+
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
