@@ -33,6 +33,15 @@ public class CharacterService {
         return characters;
     }
 
+    public List<ITCharacter> getMostWantedCharacters() {
+
+        List<ITCharacter> characters = characterRepository.findTop10ByOrderByRewardDesc();
+
+        log.info("CharacterService - getMostWantedCharacters() - List<ITCharacter>={}", characters);
+
+        return characters;
+    }
+
     public ITCharacter getCharacterById(String id) {
 
         ITCharacter character = characterRepository.findById(id)

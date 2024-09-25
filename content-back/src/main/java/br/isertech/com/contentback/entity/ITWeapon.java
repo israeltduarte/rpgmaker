@@ -33,9 +33,9 @@ public class ITWeapon extends RepresentationModel<ITWeapon> implements Serializa
     private String id;
 
     private String name;
-    private Integer ranking;
-    private String owner;
     private ITWeaponType type;
+    private Long power;
+    private String owner;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "weapon_titles", joinColumns = @JoinColumn(name = "it_weapon_id"))

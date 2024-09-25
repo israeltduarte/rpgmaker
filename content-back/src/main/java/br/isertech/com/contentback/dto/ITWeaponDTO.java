@@ -16,9 +16,9 @@ import java.util.List;
 public class ITWeaponDTO {
 
     private String name;
-    private Integer ranking;
-    private String owner;
     private ITWeaponType type;
+    private Long power;
+    private String owner;
     private List<String> titles;
     private List<String> notes;
     private LocalDateTime created;

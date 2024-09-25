@@ -42,6 +42,14 @@ public class CharacterController {
         return ResponseEntity.status(HttpStatus.OK).body(character);
     }
 
+    @GetMapping("/most-wanted")
+    public ResponseEntity<List<ITCharacter>> getMostWantedCharacters() {
+
+        List<ITCharacter> characters = characterService.getMostWantedCharacters();
+
+        return ResponseEntity.status(HttpStatus.OK).body(characters);
+    }
+
     @PostMapping
     public ResponseEntity<ITCharacter> addCharacter(@RequestBody ITCharacterDTO dto) {
 

@@ -1,6 +1,7 @@
 package br.isertech.com.contentback.controller;
 
 import br.isertech.com.contentback.dto.ITWeaponDTO;
+import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITWeapon;
 import br.isertech.com.contentback.service.WeaponService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,14 @@ public class WeaponController {
                 weapon.add(linkTo(methodOn(WeaponController.class).getWeaponById(weapon.getId())).withSelfRel());
             }
         }
+
+        return ResponseEntity.status(HttpStatus.OK).body(weapons);
+    }
+
+    @GetMapping("/most-powerful")
+    public ResponseEntity<List<ITWeapon>> getMostPowerfulCharacters() {
+
+        List<ITWeapon> weapons = weaponService.getMostPowerfulCharacters();
 
         return ResponseEntity.status(HttpStatus.OK).body(weapons);
     }

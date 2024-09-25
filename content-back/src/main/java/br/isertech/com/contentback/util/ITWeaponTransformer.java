@@ -9,9 +9,9 @@ public class ITWeaponTransformer {
         return ITWeapon.builder()
                 .name(dto.getName())
                 .type(dto.getType())
-                .titles(dto.getTitles())
+                .power(dto.getPower())
                 .owner(dto.getOwner())
-                .ranking(dto.getRanking())
+                .titles(dto.getTitles())
                 .notes(dto.getNotes())
                 .build();
     }

@@ -2,6 +2,7 @@ package br.isertech.com.contentback.service;
 
 import br.isertech.com.contentback.constants.Messages;
 import br.isertech.com.contentback.dto.ITWeaponDTO;
+import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITWeapon;
 import br.isertech.com.contentback.error.exception.WeaponNotFoundException;
 import br.isertech.com.contentback.repository.WeaponRepository;
@@ -27,6 +28,15 @@ public class WeaponService {
         List<ITWeapon> weapons = weaponRepository.findAll();
 
         log.info("WeaponService - getAllWeapons() - List<ITWeapon>={}", weapons);
+
+        return weapons;
+    }
+
+    public List<ITWeapon> getMostPowerfulCharacters() {
+
+        List<ITWeapon> weapons = weaponRepository.findTop10ByOrderByPowerDesc();
+
+        log.info("WeaponService - getMostPowerfulCharacters() - List<ITWeapon>={}", weapons);
 
         return weapons;
     }
