@@ -1,6 +1,6 @@
 package br.isertech.com.contentback.entity;
 
-import br.isertech.com.contentback.enums.ITCharacterType;
+import br.isertech.com.contentback.enums.ITCategory;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,30 +18,29 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ITCharacter extends RepresentationModel<ITCharacter> implements Serializable {
+public class ITPower extends RepresentationModel<ITPower> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "itcharacter-uuid-generator")
+    @GeneratedValue(generator = "itpower-uuid-generator")
     @GenericGenerator(
-            name = "itcharacter-uuid-generator",
+            name = "itpower-uuid-generator",
             strategy = "br.isertech.com.contentback.util.IserUUIDGenerator",
-            parameters = @Parameter(name = "prefix", value = "ITCharacter")
+            parameters = @Parameter(name = "prefix", value = "ITPower")
     )
     private String id;
+
     private String name;
-    private ITCharacterType type;
-    private Long reward;
-    private String goal;
+    private ITCategory category;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "character_notes", joinColumns = @JoinColumn(name = "it_character_id"))
-    private List<String> notes;
+    @CollectionTable(name = "power_ideas", joinColumns = @JoinColumn(name = "it_power_id"))
+    private List<String> ideas;
+
+    private String particles;
 
     private LocalDateTime created;
     private LocalDateTime updated;
-
 }
-

@@ -1,6 +1,6 @@
 package br.isertech.com.contentback.dto;
 
-import br.isertech.com.contentback.enums.ITCharacterType;
+import br.isertech.com.contentback.enums.ITWeaponType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,13 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ITCharacterDTO {
+public class ITWeaponDTO {
 
     private String name;
-    private ITCharacterType type;
-    private String player;
-    private Long reward;
-    private String goal;
+    private Integer ranking;
+    private String owner;
+    private ITWeaponType type;
+    private List<String> titles;
     private List<String> notes;
     private LocalDateTime created;
     private LocalDateTime updated;
