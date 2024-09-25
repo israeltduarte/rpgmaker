@@ -32,6 +32,7 @@ public class ITCharacter extends RepresentationModel<ITCharacter> implements Ser
     )
     private String id;
     private String name;
+    private String player;
     private ITCharacterType type;
     private Long reward;
     private String goal;

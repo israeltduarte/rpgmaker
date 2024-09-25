@@ -55,7 +55,7 @@ public class CharacterController {
 
         ITCharacter character = characterService.addCharacter(dto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(character);
+        return ResponseEntity.status(HttpStatus.CREATED).body(character);
     }
 
     @PutMapping("/{id}")

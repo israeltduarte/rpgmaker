@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CharacterRepository extends JpaRepository<ITCharacter, String>, JpaSpecificationExecutor<ITCharacter> {
 
-    List<ITCharacter> findTop10ByOrderByRewardDesc();
+    List<ITCharacter> findTop10ByRewardIsNotNullOrderByRewardDesc();
 
 }

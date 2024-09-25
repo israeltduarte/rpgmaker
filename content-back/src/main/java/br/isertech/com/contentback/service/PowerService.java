@@ -5,10 +5,10 @@ import br.isertech.com.contentback.dto.ITPowerDTO;
 import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.error.exception.PowerNotFoundException;
 import br.isertech.com.contentback.repository.PowerRepository;
-import br.isertech.com.contentback.util.ITPowerTransformer;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,6 +21,7 @@ import java.util.List;
 public class PowerService {
 
     private final PowerRepository powerRepository;
+    private final ModelMapper mapper;
 
     public List<ITPower> getAllPowers() {
 
@@ -51,10 +52,11 @@ public class PowerService {
         return power;
     }
 
-    private ITPower getNewPowerEntityReady(ITPowerDTO powerDto) {
+    private ITPower getNewPowerEntityReady(ITPowerDTO dto) {
 
         LocalDateTime time = LocalDateTime.now();
-        ITPower power = ITPowerTransformer.fromDTO(powerDto);
+
+        ITPower power = mapper.map(dto, ITPower.class);
         power.setCreated(time);
         power.setUpdated(time);
 
@@ -67,7 +69,8 @@ public class PowerService {
                 .orElseThrow(() -> new PowerNotFoundException(Messages.POWER_NOT_FOUND_INFO));
 
         LocalDateTime time = LocalDateTime.now();
-        power = ITPowerTransformer.fromDTO(dto);
+
+        mapper.map(dto, power);
         power.setId(power.getId());
         power.setUpdated(time);
 

@@ -2,14 +2,13 @@ package br.isertech.com.contentback.service;
 
 import br.isertech.com.contentback.constants.Messages;
 import br.isertech.com.contentback.dto.ITWeaponDTO;
-import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITWeapon;
 import br.isertech.com.contentback.error.exception.WeaponNotFoundException;
 import br.isertech.com.contentback.repository.WeaponRepository;
-import br.isertech.com.contentback.util.ITWeaponTransformer;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +21,7 @@ import java.util.List;
 public class WeaponService {
 
     private final WeaponRepository weaponRepository;
+    private final ModelMapper mapper;
 
     public List<ITWeapon> getAllWeapons() {
 
@@ -61,10 +61,11 @@ public class WeaponService {
         return weapon;
     }
 
-    private ITWeapon getNewWeaponEntityReady(ITWeaponDTO weaponDto) {
+    private ITWeapon getNewWeaponEntityReady(ITWeaponDTO dto) {
 
         LocalDateTime time = LocalDateTime.now();
-        ITWeapon weapon = ITWeaponTransformer.fromDTO(weaponDto);
+
+        ITWeapon weapon = mapper.map(dto, ITWeapon.class);
         weapon.setCreated(time);
         weapon.setUpdated(time);
 
@@ -77,7 +78,9 @@ public class WeaponService {
                 .orElseThrow(() -> new WeaponNotFoundException(Messages.WEAPON_NOT_FOUND_INFO));
 
         LocalDateTime time = LocalDateTime.now();
-        weapon = ITWeaponTransformer.fromDTO(dto);
+
+        mapper.map(dto, weapon);
+
         weapon.setId(weapon.getId());
         weapon.setUpdated(time);
 

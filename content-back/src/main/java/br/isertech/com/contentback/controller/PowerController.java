@@ -47,7 +47,7 @@ public class PowerController {
 
         ITPower power = powerService.addPower(dto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(power);
+        return ResponseEntity.status(HttpStatus.CREATED).body(power);
     }
 
     @PutMapping("/{id}")

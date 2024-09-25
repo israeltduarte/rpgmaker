@@ -6,10 +6,11 @@ import br.isertech.com.contentback.dto.ITCharacterDTO;
 import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.error.exception.CharacterNotFoundException;
 import br.isertech.com.contentback.repository.CharacterRepository;
-import br.isertech.com.contentback.util.ITCharacterTransformer;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ public class CharacterService {
 
     private final CharacterRepository characterRepository;
     private final ITUserClient itUserClient;
+    private final ModelMapper mapper;
 
     public List<ITCharacter> getAllCharacters() {
 
@@ -35,7 +37,7 @@ public class CharacterService {
 
     public List<ITCharacter> getMostWantedCharacters() {
 
-        List<ITCharacter> characters = characterRepository.findTop10ByOrderByRewardDesc();
+        List<ITCharacter> characters = characterRepository.findTop10ByRewardIsNotNullOrderByRewardDesc();
 
         log.info("CharacterService - getMostWantedCharacters() - List<ITCharacter>={}", characters);
 
@@ -65,7 +67,8 @@ public class CharacterService {
     private ITCharacter getNewCharacterEntityReady(ITCharacterDTO characterDto) {
 
         LocalDateTime time = LocalDateTime.now();
-        ITCharacter character = ITCharacterTransformer.fromDTO(characterDto);
+
+        ITCharacter character = mapper.map(characterDto, ITCharacter.class);
         character.setCreated(time);
         character.setUpdated(time);
 
@@ -77,9 +80,10 @@ public class CharacterService {
         ITCharacter character = characterRepository.findById(characterId)
                 .orElseThrow(() -> new CharacterNotFoundException(Messages.CHARACTER_NOT_FOUND_INFO));
 
+        mapper.map(dto, character);
+
         LocalDateTime time = LocalDateTime.now();
-        character = ITCharacterTransformer.fromDTO(dto);
-        character.setId(character.getId());
+        character.setId(characterId);
         character.setUpdated(time);
 
         character = characterRepository.save(character);
