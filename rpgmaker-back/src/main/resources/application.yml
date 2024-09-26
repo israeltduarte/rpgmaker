@@ -17,10 +17,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/rpgmakerdb
     username: postgres
     password: postgres
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    table: flyway_auth_schema_history
   jpa:
     database: POSTGRESQL
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
       jdbc:
         lob.non-contextual-creation: true
     properties:
@@ -45,7 +49,7 @@ logging:
     org.hibernate: INFO
     web: DEBUG
 
-rm:
+rpg-maker:
   serviceRegistry:
     username: serviceregistry
     password: vento123
@@ -57,7 +61,7 @@ eureka:
   client:
     enabled: true
     service-url:
-      defaultZone: 'http://${rm.serviceRegistry.username}:${rm.serviceRegistry.password}@localhost:8761/eureka'
+      defaultZone: 'http://${rpg-maker.serviceRegistry.username}:${rpg-maker.serviceRegistry.password}@localhost:8761/eureka'
   instance:
     hostname: localhost
 

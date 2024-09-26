@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 @Component
 public class JwtProvider {
 
-    @Value("${rm.auth.jwtSecret}")
+    @Value("${rpg-maker.auth.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${rm.auth.jwtExpirationMs}")
+    @Value("${rpg-maker.auth.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwt(Authentication authentication) {

@@ -38,7 +38,7 @@ public class ITCharacter extends RepresentationModel<ITCharacter> implements Ser
     private String goal;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "character_notes", joinColumns = @JoinColumn(name = "it_character_id"))
+    @CollectionTable(name = "itcharacter_notes", joinColumns = @JoinColumn(name = "it_character_id"))
     private List<String> notes;
 
     private LocalDateTime created;
