@@ -25,11 +25,6 @@ public class WeaponController {
     public ResponseEntity<List<ITWeapon>> getAllWeapons() {
 
         List<ITWeapon> weapons = weaponService.getAllWeapons();
-        if (!weapons.isEmpty()) {
-            for (ITWeapon weapon : weapons) {
-                weapon.add(linkTo(methodOn(WeaponController.class).getWeaponById(weapon.getId())).withSelfRel());
-            }
-        }
 
         return ResponseEntity.status(HttpStatus.OK).body(weapons);
     }

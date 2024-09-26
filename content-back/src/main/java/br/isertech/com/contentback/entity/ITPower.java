@@ -1,6 +1,6 @@
 package br.isertech.com.contentback.entity;
 
-import br.isertech.com.contentback.enums.ITCategory;
+import br.isertech.com.contentback.enums.ITPowerCategory;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -33,10 +33,10 @@ public class ITPower extends RepresentationModel<ITPower> implements Serializabl
     private String id;
 
     private String name;
-    private ITCategory category;
+    private ITPowerCategory category;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "itpower_ideas", joinColumns = @JoinColumn(name = "it_power_id"))
+    @CollectionTable(name = "itpower_ideas", joinColumns = @JoinColumn(name = "itpower_id"))
     private List<String> ideas;
 
     private String particles;

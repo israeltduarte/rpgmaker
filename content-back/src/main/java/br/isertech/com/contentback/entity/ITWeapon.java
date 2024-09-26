@@ -38,11 +38,11 @@ public class ITWeapon extends RepresentationModel<ITWeapon> implements Serializa
     private String owner;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "weapon_titles", joinColumns = @JoinColumn(name = "it_weapon_id"))
+    @CollectionTable(name = "weapon_titles", joinColumns = @JoinColumn(name = "itweapon_id"))
     private List<String> titles;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "weapon_notes", joinColumns = @JoinColumn(name = "it_weapon_id"))
+    @CollectionTable(name = "weapon_notes", joinColumns = @JoinColumn(name = "itweapon_id"))
     private List<String> notes;
 
     private LocalDateTime created;

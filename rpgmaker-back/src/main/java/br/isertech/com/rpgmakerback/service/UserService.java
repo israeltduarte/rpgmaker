@@ -25,7 +25,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
-//    private final ItemService itemService;
 
     public List<ITUser> getAllUsers() {
 
@@ -45,20 +44,6 @@ public class UserService {
 
         return user;
     }
-
-//    public List<Item> getAllUserItems(String userId) {
-//
-//        ITUser user = userRepository.findById(userId)
-//                .orElseThrow(() -> new UserNotFoundException(Messages.USER_NOT_FOUND_INFO));
-//
-//        log.info("UserService - getAllUserItems() - ITUser={}", user);
-//
-//        List<Item> items = itemService.getAllItemsByUserId(userId);
-//
-//        log.info("UserService - getAllUserItems() - List<Item>={}", items);
-//
-//        return items;
-//    }
 
     public ITUser addUser(UserDTO userDTO) {
 

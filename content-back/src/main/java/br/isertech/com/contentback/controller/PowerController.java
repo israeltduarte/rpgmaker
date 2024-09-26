@@ -25,11 +25,6 @@ public class PowerController {
     public ResponseEntity<List<ITPower>> getAllPowers() {
 
         List<ITPower> powers = powerService.getAllPowers();
-        if (!powers.isEmpty()) {
-            for (ITPower power : powers) {
-                power.add(linkTo(methodOn(PowerController.class).getPowerById(power.getId())).withSelfRel());
-            }
-        }
 
         return ResponseEntity.status(HttpStatus.OK).body(powers);
     }

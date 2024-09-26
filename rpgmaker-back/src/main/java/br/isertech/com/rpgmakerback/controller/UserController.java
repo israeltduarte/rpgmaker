@@ -37,19 +37,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
-//    @GetMapping("/{userId}/items")
-//    public ResponseEntity<List<Item>> getAllUserItems(@PathVariable String userId) {
-//
-//        List<Item> items = userService.getAllUserItems(userId);
-//        if (!items.isEmpty()) {
-//            for (Item item : items) {
-//                item.add(linkTo(methodOn(ItemController.class).getItemById(item.getId())).withSelfRel());
-//            }
-//        }
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(items);
-//    }
-
     @GetMapping("/id/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<ITUser> getUserById(@PathVariable String id) {

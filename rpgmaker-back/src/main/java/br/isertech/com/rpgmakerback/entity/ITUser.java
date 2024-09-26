@@ -53,10 +53,5 @@ public class ITUser extends RepresentationModel<ITUser> implements Serializable 
     @ToString.Exclude
     private List<Role> roles;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonIgnore
-    @ToString.Exclude
-    private List<Item> items;
-
 }
 

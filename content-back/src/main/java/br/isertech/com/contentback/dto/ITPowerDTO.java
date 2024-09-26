@@ -1,6 +1,6 @@
 package br.isertech.com.contentback.dto;
 
-import br.isertech.com.contentback.enums.ITCategory;
+import br.isertech.com.contentback.enums.ITPowerCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ITPowerDTO {
 
     private String name;
-    private ITCategory category;
+    private ITPowerCategory category;
     private List<String> ideas;
     private String particles;
     private LocalDateTime created;
