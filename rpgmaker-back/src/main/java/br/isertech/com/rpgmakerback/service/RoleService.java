@@ -35,20 +35,20 @@ public class RoleService {
 
     public ITRole registerRole(RoleDTO roleDTO) {
 
-        ITRoleType roleName = ITRoleType.valueOf(roleDTO.getRoleName());
+        ITRoleType roleName = ITRoleType.valueOf(roleDTO.getName());
 
-        Optional<ITRole> role = roleRepository.findByRoleName(roleName);
+        Optional<ITRole> role = roleRepository.findByName(roleName);
         if (role.isPresent()) {
             throw new RoleAlreadyExistsException(Messages.ROLE_ALREADY_EXISTS);
         }
 
         ITRole newRole = ITRole.builder()
-                .roleName(ITRoleType.valueOf(roleDTO.getRoleName()))
+                .name(ITRoleType.valueOf(roleDTO.getName()))
                 .build();
         try {
             newRole = roleRepository.save(newRole);
         } catch (DataIntegrityViolationException e) {
-            String message = Messages.ROLE_ALREADY_EXISTS.concat(". RoleType = " + roleDTO.getRoleName());
+            String message = Messages.ROLE_ALREADY_EXISTS.concat(". RoleType = " + roleDTO.getName());
             log.error(message);
             throw new RoleAlreadyExistsException(message);
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class RoleService {
         } catch (Exception e) {
             throw new RoleNotFoundException(Messages.ROLE_NOT_FOUND_INFO.concat(roleName));
         }
-        ITRole role = roleRepository.findByRoleName(roleType)
+        ITRole role = roleRepository.findByName(roleType)
                 .orElseThrow(() -> new RoleNotFoundException(Messages.ROLE_NOT_FOUND_INFO));
         log.info("RoleService - findByRoleName() - Role={}", role);
 

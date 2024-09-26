@@ -35,11 +35,11 @@ public class ITRole implements GrantedAuthority, Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true, length = 30)
-    private ITRoleType roleName;
+    private ITRoleType name;
 
     @Override
     @JsonIgnore
     public String getAuthority() {
-        return this.roleName.toString();
+        return this.name.toString();
     }
 }

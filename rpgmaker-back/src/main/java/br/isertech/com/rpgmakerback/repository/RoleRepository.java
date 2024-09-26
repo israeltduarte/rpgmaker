@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface RoleRepository extends JpaRepository<ITRole, String>, JpaSpecificationExecutor<ITRole> {
 
-    Optional<ITRole> findByRoleName(ITRoleType roleType);
+    Optional<ITRole> findByName(ITRoleType roleType);
 
 }
