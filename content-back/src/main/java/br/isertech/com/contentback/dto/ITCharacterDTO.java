@@ -20,6 +20,7 @@ public class ITCharacterDTO {
     private String player;
     private Long reward;
     private String goal;
+    private String powerId;
     private List<String> notes;
     private LocalDateTime created;
     private LocalDateTime updated;

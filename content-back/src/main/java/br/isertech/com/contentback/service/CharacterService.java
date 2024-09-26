@@ -4,13 +4,13 @@ import br.isertech.com.contentback.client.ITUserClient;
 import br.isertech.com.contentback.constants.Messages;
 import br.isertech.com.contentback.dto.ITCharacterDTO;
 import br.isertech.com.contentback.entity.ITCharacter;
+import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.error.exception.CharacterNotFoundException;
 import br.isertech.com.contentback.repository.CharacterRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,6 +25,7 @@ public class CharacterService {
     private final CharacterRepository characterRepository;
     private final ITUserClient itUserClient;
     private final ModelMapper mapper;
+    private final PowerService powerService;
 
     public List<ITCharacter> getAllCharacters() {
 
@@ -57,6 +58,11 @@ public class CharacterService {
     public ITCharacter addCharacter(ITCharacterDTO dto) {
 
         ITCharacter character = getNewCharacterEntityReady(dto);
+        if (dto.getPowerId() != null) {
+            ITPower power = powerService.getPowerById(dto.getPowerId());
+            character.setPower(power);
+        }
+
         character = characterRepository.save(character);
 
         log.info("CharacterService - addCharacter() - ITCharacter={}", character);
@@ -64,11 +70,11 @@ public class CharacterService {
         return character;
     }
 
-    private ITCharacter getNewCharacterEntityReady(ITCharacterDTO characterDto) {
+    private ITCharacter getNewCharacterEntityReady(ITCharacterDTO dto) {
 
         LocalDateTime time = LocalDateTime.now();
 
-        ITCharacter character = mapper.map(characterDto, ITCharacter.class);
+        ITCharacter character = mapper.map(dto, ITCharacter.class);
         character.setCreated(time);
         character.setUpdated(time);
 

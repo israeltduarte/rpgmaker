@@ -36,7 +36,9 @@ public class ITCharacter extends RepresentationModel<ITCharacter> implements Ser
     private ITCharacterType type;
     private Long reward;
     private String goal;
-
+    @ManyToOne(targetEntity = ITPower.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "itpower_id")
+    private ITPower power;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "itcharacter_notes", joinColumns = @JoinColumn(name = "itcharacter_id"))
     private List<String> notes;

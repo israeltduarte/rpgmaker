@@ -1,3 +1,17 @@
+CREATE TABLE public.itpower
+(
+    id        VARCHAR(255) NOT NULL PRIMARY KEY,
+    name      VARCHAR(255),
+    category  SMALLINT
+        CONSTRAINT itpower_category_check CHECK ((category >= 0) AND (category <= 3)),
+    particles VARCHAR(255),
+    updated   TIMESTAMP(6),
+    created   TIMESTAMP(6)
+);
+
+ALTER TABLE public.itpower
+    OWNER TO postgres;
+
 CREATE TABLE public.itcharacter
 (
     id      VARCHAR(255) NOT NULL PRIMARY KEY,
@@ -7,6 +21,8 @@ CREATE TABLE public.itcharacter
         CONSTRAINT itcharacter_type_check CHECK ((type >= 0) AND (type <= 1)),
     reward  BIGINT,
     goal    VARCHAR(255),
+    itpower_id   VARCHAR(255)
+        CONSTRAINT fk_power REFERENCES public.itpower (id),
     updated TIMESTAMP(6),
     created TIMESTAMP(6)
 );
@@ -22,20 +38,6 @@ CREATE TABLE public.itcharacter_notes
 );
 
 ALTER TABLE public.itcharacter_notes
-    OWNER TO postgres;
-
-CREATE TABLE public.itpower
-(
-    id        VARCHAR(255) NOT NULL PRIMARY KEY,
-    name      VARCHAR(255),
-    category  SMALLINT
-        CONSTRAINT itpower_category_check CHECK ((category >= 0) AND (category <= 3)),
-    particles VARCHAR(255),
-    updated   TIMESTAMP(6),
-    created   TIMESTAMP(6)
-);
-
-ALTER TABLE public.itpower
     OWNER TO postgres;
 
 CREATE TABLE public.itweapon
