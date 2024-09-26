@@ -1,84 +1,84 @@
-create table public.itcharacter
+CREATE TABLE public.itcharacter
 (
-    id      varchar(255) not null primary key,
-    name    varchar(255),
-    player  varchar(255),
-    type    smallint
-        constraint itcharacter_type_check check ((type >= 0) AND (type <= 1)),
-    reward  bigint,
-    goal    varchar(255),
-    updated timestamp(6),
-    created timestamp(6)
+    id      VARCHAR(255) NOT NULL PRIMARY KEY,
+    name    VARCHAR(255),
+    player  VARCHAR(255),
+    type    SMALLINT
+        CONSTRAINT itcharacter_type_check CHECK ((type >= 0) AND (type <= 1)),
+    reward  BIGINT,
+    goal    VARCHAR(255),
+    updated TIMESTAMP(6),
+    created TIMESTAMP(6)
 );
 
-alter table public.itcharacter
-    owner to postgres;
+ALTER TABLE public.itcharacter
+    OWNER TO postgres;
 
-create table public.itcharacter_notes
+CREATE TABLE public.itcharacter_notes
 (
-    itcharacter_id varchar(255) not null
-        constraint fkt822hgnw14mul6wn9asuhaplx references public.itcharacter,
-    notes           varchar(255)
+    itcharacter_id VARCHAR(255) NOT NULL
+        CONSTRAINT fkt822hgnw14mul6wn9asuhaplx REFERENCES public.itcharacter,
+    notes          VARCHAR(255)
 );
 
-alter table public.itcharacter_notes
-    owner to postgres;
+ALTER TABLE public.itcharacter_notes
+    OWNER TO postgres;
 
-create table public.itpower
+CREATE TABLE public.itpower
 (
-    id        varchar(255) not null primary key,
-    name      varchar(255),
-    category  smallint
-        constraint itpower_category_check check ((category >= 0) AND (category <= 3)),
-    particles varchar(255),
-    updated   timestamp(6),
-    created   timestamp(6)
+    id        VARCHAR(255) NOT NULL PRIMARY KEY,
+    name      VARCHAR(255),
+    category  SMALLINT
+        CONSTRAINT itpower_category_check CHECK ((category >= 0) AND (category <= 3)),
+    particles VARCHAR(255),
+    updated   TIMESTAMP(6),
+    created   TIMESTAMP(6)
 );
 
-alter table public.itpower
-    owner to postgres;
+ALTER TABLE public.itpower
+    OWNER TO postgres;
 
-create table public.itweapon
+CREATE TABLE public.itweapon
 (
-    id      varchar(255) not null primary key,
-    name    varchar(255),
-    owner   varchar(255),
-    power   bigint,
-    type    smallint
-        constraint itweapon_type_check check ((type >= 0) AND (type <= 12)),
-    updated timestamp(6),
-    created timestamp(6)
+    id      VARCHAR(255) NOT NULL PRIMARY KEY,
+    name    VARCHAR(255),
+    owner   VARCHAR(255),
+    power   BIGINT,
+    type    SMALLINT
+        CONSTRAINT itweapon_type_check CHECK ((type >= 0) AND (type <= 12)),
+    updated TIMESTAMP(6),
+    created TIMESTAMP(6)
 );
 
-alter table public.itweapon
-    owner to postgres;
+ALTER TABLE public.itweapon
+    OWNER TO postgres;
 
-create table public.itpower_ideas
+CREATE TABLE public.itpower_ideas
 (
-    itpower_id varchar(255) not null
-        constraint fkllcimmpqxhikwq5d5ye1th2t6 references public.itpower,
-    ideas       varchar(255)
+    itpower_id VARCHAR(255) NOT NULL
+        CONSTRAINT fkllcimmpqxhikwq5d5ye1th2t6 REFERENCES public.itpower,
+    ideas      VARCHAR(255)
 );
 
-alter table public.itpower_ideas
-    owner to postgres;
+ALTER TABLE public.itpower_ideas
+    OWNER TO postgres;
 
-create table public.weapon_notes
+CREATE TABLE public.weapon_notes
 (
-    itweapon_id varchar(255) not null
-        constraint fkb2py6palsbhciul7bua9kvrmy references public.itweapon,
-    notes        varchar(255)
+    itweapon_id VARCHAR(255) NOT NULL
+        CONSTRAINT fkb2py6palsbhciul7bua9kvrmy REFERENCES public.itweapon,
+    notes       VARCHAR(255)
 );
 
-alter table public.weapon_notes
-    owner to postgres;
+ALTER TABLE public.weapon_notes
+    OWNER TO postgres;
 
-create table public.weapon_titles
+CREATE TABLE public.weapon_titles
 (
-    itweapon_id varchar(255) not null
-        constraint fka5h5007hfve5dsloy5u6e3wwh references public.itweapon,
-    titles       varchar(255)
+    itweapon_id VARCHAR(255) NOT NULL
+        CONSTRAINT fka5h5007hfve5dsloy5u6e3wwh REFERENCES public.itweapon,
+    titles      VARCHAR(255)
 );
 
-alter table public.weapon_titles
-    owner to postgres;
+ALTER TABLE public.weapon_titles
+    OWNER TO postgres;

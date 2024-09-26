@@ -1,36 +1,36 @@
-create table public.role
+CREATE TABLE public.itrole
 (
-    id        varchar(255) not null primary key,
-    role_name varchar(30)  not null unique
-        constraint role_role_name_check check ((role_name)::text = ANY
-                                               ((ARRAY ['ROLE_ADMIN'::character varying, 'ROLE_USER'::character varying])::text[]))
+    id   VARCHAR(255) NOT NULL PRIMARY KEY,
+    name VARCHAR(30)  NOT NULL UNIQUE
+        CONSTRAINT role_name_check CHECK ((name)::TEXT = ANY
+                                          ((ARRAY ['ROLE_ADMIN'::CHARACTER VARYING, 'ROLE_USER'::CHARACTER VARYING])::TEXT[]))
 );
 
-alter table public.role
-    owner to postgres;
+ALTER TABLE public.itrole
+    OWNER TO postgres;
 
-create table public.ituser
+CREATE TABLE public.ituser
 (
-    id        varchar(255) not null primary key,
-    name      varchar(255),
-    last_name varchar(255),
-    email     varchar(255),
-    username  varchar(255) unique,
-    password  varchar(255),
-    updated   timestamp(6),
-    created   timestamp(6)
+    id        VARCHAR(255) NOT NULL PRIMARY KEY,
+    name      VARCHAR(255),
+    last_name VARCHAR(255),
+    email     VARCHAR(255),
+    username  VARCHAR(255) UNIQUE,
+    password  VARCHAR(255),
+    updated   TIMESTAMP(6),
+    created   TIMESTAMP(6)
 );
 
-alter table public.ituser
-    owner to postgres;
+ALTER TABLE public.ituser
+    OWNER TO postgres;
 
-create table public.users_roles
+CREATE TABLE public.itusers_itroles
 (
-    user_id varchar(255) not null
-        constraint fkluvr57lisdbxa7kxykag8bws9 references public.ituser,
-    role_id varchar(255) not null
-        constraint fkt4v0rrweyk393bdgt107vdx0x references public.role
+    ituser_id VARCHAR(255) NOT NULL
+        CONSTRAINT fkluvr57lisdbxa7kxykag8bws9 REFERENCES public.ituser,
+    itrole_id VARCHAR(255) NOT NULL
+        CONSTRAINT fkt4v0rrweyk393bdgt107vdx0x REFERENCES public.itrole
 );
 
-alter table public.users_roles
-    owner to postgres;
+ALTER TABLE public.itusers_itroles
+    OWNER TO postgres;

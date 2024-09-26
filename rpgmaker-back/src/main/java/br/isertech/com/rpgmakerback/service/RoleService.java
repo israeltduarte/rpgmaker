@@ -2,8 +2,8 @@ package br.isertech.com.rpgmakerback.service;
 
 import br.isertech.com.rpgmakerback.constants.Messages;
 import br.isertech.com.rpgmakerback.dto.RoleDTO;
-import br.isertech.com.rpgmakerback.entity.Role;
-import br.isertech.com.rpgmakerback.enums.RoleType;
+import br.isertech.com.rpgmakerback.entity.ITRole;
+import br.isertech.com.rpgmakerback.enums.ITRoleType;
 import br.isertech.com.rpgmakerback.error.exception.OperationFailedException;
 import br.isertech.com.rpgmakerback.error.exception.RoleAlreadyExistsException;
 import br.isertech.com.rpgmakerback.error.exception.RoleNotFoundException;
@@ -25,25 +25,25 @@ public class RoleService {
 
     private final RoleRepository roleRepository;
 
-    public List<Role> getAllRoles() {
+    public List<ITRole> getAllRoles() {
 
-        List<Role> roles = roleRepository.findAll();
+        List<ITRole> roles = roleRepository.findAll();
         log.info("RoleService - getAllRoles() - List<Role>={}", roles);
 
         return roles;
     }
 
-    public Role registerRole(RoleDTO roleDTO) {
+    public ITRole registerRole(RoleDTO roleDTO) {
 
-        RoleType roleName = RoleType.valueOf(roleDTO.getRoleName());
+        ITRoleType roleName = ITRoleType.valueOf(roleDTO.getRoleName());
 
-        Optional<Role> role = roleRepository.findByRoleName(roleName);
+        Optional<ITRole> role = roleRepository.findByRoleName(roleName);
         if (role.isPresent()) {
             throw new RoleAlreadyExistsException(Messages.ROLE_ALREADY_EXISTS);
         }
 
-        Role newRole = Role.builder()
-                .roleName(RoleType.valueOf(roleDTO.getRoleName()))
+        ITRole newRole = ITRole.builder()
+                .roleName(ITRoleType.valueOf(roleDTO.getRoleName()))
                 .build();
         try {
             newRole = roleRepository.save(newRole);
@@ -60,22 +60,22 @@ public class RoleService {
         return newRole;
     }
 
-    public Role findByRoleName(String roleName) {
+    public ITRole findByRoleName(String roleName) {
 
-        RoleType roleType;
+        ITRoleType roleType;
         try {
-            roleType = RoleType.valueOf(roleName);
+            roleType = ITRoleType.valueOf(roleName);
         } catch (Exception e) {
             throw new RoleNotFoundException(Messages.ROLE_NOT_FOUND_INFO.concat(roleName));
         }
-        Role role = roleRepository.findByRoleName(roleType)
+        ITRole role = roleRepository.findByRoleName(roleType)
                 .orElseThrow(() -> new RoleNotFoundException(Messages.ROLE_NOT_FOUND_INFO));
         log.info("RoleService - findByRoleName() - Role={}", role);
 
         return role;
     }
 
-    public List<Role> checkAndGetRoles(List<String> rolesDTO) {
+    public List<ITRole> checkAndGetRoles(List<String> rolesDTO) {
 
         return rolesDTO.parallelStream()
                 .map(this::findByRoleName)

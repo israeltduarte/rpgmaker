@@ -45,13 +45,13 @@ public class ITUser extends RepresentationModel<ITUser> implements Serializable 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "USERS_ROLES",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ROLE_ID")
+            name = "ITUSERS_ITROLES",
+            joinColumns = @JoinColumn(name = "ITUSER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ITROLE_ID")
     )
     @JsonIgnore
     @ToString.Exclude
-    private List<Role> roles;
+    private List<ITRole> roles;
 
 }
 

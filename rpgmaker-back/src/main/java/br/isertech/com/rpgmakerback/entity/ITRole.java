@@ -1,6 +1,6 @@
 package br.isertech.com.rpgmakerback.entity;
 
-import br.isertech.com.rpgmakerback.enums.RoleType;
+import br.isertech.com.rpgmakerback.enums.ITRoleType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Role implements GrantedAuthority, Serializable {
+public class ITRole implements GrantedAuthority, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -29,13 +29,13 @@ public class Role implements GrantedAuthority, Serializable {
     @GenericGenerator(
             name = "role-uuid-generator",
             strategy = "br.isertech.com.rpgmakerback.util.IserUUIDGenerator",
-            parameters = @Parameter(name = "prefix", value = "Role")
+            parameters = @Parameter(name = "prefix", value = "ITRole")
     )
     private String id;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true, length = 30)
-    private RoleType roleName;
+    private ITRoleType roleName;
 
     @Override
     @JsonIgnore

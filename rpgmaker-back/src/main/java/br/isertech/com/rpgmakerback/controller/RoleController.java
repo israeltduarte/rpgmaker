@@ -1,7 +1,7 @@
 package br.isertech.com.rpgmakerback.controller;
 
 import br.isertech.com.rpgmakerback.dto.RoleDTO;
-import br.isertech.com.rpgmakerback.entity.Role;
+import br.isertech.com.rpgmakerback.entity.ITRole;
 import br.isertech.com.rpgmakerback.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,17 +21,17 @@ public class RoleController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping
-    public ResponseEntity<List<Role>> getAllRoles() {
+    public ResponseEntity<List<ITRole>> getAllRoles() {
 
-        List<Role> roles = roleService.getAllRoles();
+        List<ITRole> roles = roleService.getAllRoles();
 
         return ResponseEntity.status(HttpStatus.OK).body(roles);
     }
 
     @PostMapping
-    public ResponseEntity<Role> registerRole(@RequestBody RoleDTO dto) {
+    public ResponseEntity<ITRole> registerRole(@RequestBody RoleDTO dto) {
 
-        Role role = roleService.registerRole(dto);
+        ITRole role = roleService.registerRole(dto);
 
         return ResponseEntity.status(HttpStatus.OK).body(role);
     }

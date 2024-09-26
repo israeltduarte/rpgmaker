@@ -3,7 +3,7 @@ package br.isertech.com.rpgmakerback.service;
 import br.isertech.com.rpgmakerback.constants.Messages;
 import br.isertech.com.rpgmakerback.dto.UserDTO;
 import br.isertech.com.rpgmakerback.entity.ITUser;
-import br.isertech.com.rpgmakerback.entity.Role;
+import br.isertech.com.rpgmakerback.entity.ITRole;
 import br.isertech.com.rpgmakerback.error.exception.UserNotFoundException;
 import br.isertech.com.rpgmakerback.repository.UserRepository;
 import br.isertech.com.rpgmakerback.util.ITUserTransformer;
@@ -58,7 +58,7 @@ public class UserService {
     private ITUser getNewUserEntityReady(UserDTO userDTO) {
 
         LocalDateTime time = LocalDateTime.now();
-        List<Role> roles = roleService.checkAndGetRoles(userDTO.getRoles());
+        List<ITRole> roles = roleService.checkAndGetRoles(userDTO.getRoles());
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         ITUser user = ITUserTransformer.fromDTO(userDTO);
@@ -102,7 +102,7 @@ public class UserService {
         ITUser user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(Messages.USER_NOT_FOUND_INFO));
 
-        List<Role> roles;
+        List<ITRole> roles;
         user = ITUserTransformer.fromDTO(user, userDTO);
         if (null != userDTO.getRoles() && !userDTO.getRoles().isEmpty()) {
             roles = roleService.checkAndGetRoles(userDTO.getRoles());
