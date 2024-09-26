@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -22,6 +23,7 @@ public class PowerService {
 
     private final PowerRepository powerRepository;
     private final ModelMapper mapper;
+    private final Random random = new Random();
 
     public List<ITPower> getAllPowers() {
 
@@ -38,6 +40,16 @@ public class PowerService {
                 .orElseThrow(() -> new PowerNotFoundException(Messages.POWER_NOT_FOUND_INFO));
 
         log.info("PowerService - getPowerById() - ITPower={}", power);
+
+        return power;
+    }
+
+    public ITPower getRandomPower() {
+
+        ITPower power = powerRepository.findFirstOrderByRandom()
+                .orElseThrow(() -> new PowerNotFoundException(Messages.POWER_NOT_FOUND_INFO));
+
+        log.info("PowerService - getRandomPower() - ITPower={}", power);
 
         return power;
     }

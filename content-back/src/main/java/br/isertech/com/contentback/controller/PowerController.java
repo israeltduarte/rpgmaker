@@ -37,6 +37,14 @@ public class PowerController {
         return ResponseEntity.status(HttpStatus.OK).body(power);
     }
 
+    @GetMapping("/random")
+    public ResponseEntity<ITPower> getRandomPower() {
+
+        ITPower power = powerService.getRandomPower();
+
+        return ResponseEntity.status(HttpStatus.OK).body(power);
+    }
+
     @PostMapping
     public ResponseEntity<ITPower> addPower(@RequestBody ITPowerDTO dto) {
 

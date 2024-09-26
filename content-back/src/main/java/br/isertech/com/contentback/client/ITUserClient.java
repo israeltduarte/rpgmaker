@@ -3,10 +3,10 @@ package br.isertech.com.contentback.client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient("rpgmaker-back")
+@FeignClient("${clients.auth-client.name}")
 public interface ITUserClient {
 
-    @GetMapping("/rpgmaker-back/api/test")
+    @GetMapping("${clients.auth-client.url}/api/test")
     String getTest();
 
 }

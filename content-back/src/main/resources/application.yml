@@ -83,5 +83,5 @@ resilience4j:
 
 clients:
   auth-client:
-    name: 'weight-client'
-    url: 'localhost:8080/wt-weight-service'
+    name: 'ituser-client'
+    url: 'localhost:8080/rpgmaker-back'

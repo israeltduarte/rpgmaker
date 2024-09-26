@@ -33,7 +33,7 @@ public class ITPower extends RepresentationModel<ITPower> implements Serializabl
     private String id;
     private String name;
     private ITPowerCategory category;
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "itpower_ideas", joinColumns = @JoinColumn(name = "itpower_id"))
     private List<String> ideas;
 

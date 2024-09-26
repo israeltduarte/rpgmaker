@@ -1,6 +1,7 @@
 package br.isertech.com.contentback.entity;
 
 import br.isertech.com.contentback.enums.ITCharacterType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -36,10 +37,11 @@ public class ITCharacter extends RepresentationModel<ITCharacter> implements Ser
     private ITCharacterType type;
     private Long reward;
     private String goal;
-    @ManyToOne(targetEntity = ITPower.class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "itpower_id")
+    @JsonIgnore
     private ITPower power;
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "itcharacter_notes", joinColumns = @JoinColumn(name = "itcharacter_id"))
     private List<String> notes;
 
