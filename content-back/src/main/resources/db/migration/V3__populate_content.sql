@@ -20,7 +20,7 @@ INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('R
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'estrela', 3, 'gas, luz, magnetismo', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'sol', 3, 'estrela, fogo, magnetismo', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'som', 3, 'vento, energia, vento', now(), now());
-INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'corte', 3, 'vento, energia, vento', now(), now());
+-- INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'corte', 3, 'vento, energia, vento', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'pedra', 3, 'pedra, pedra, pedra', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'terra', 3, 'pedra, vento, água', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'planta', 3, 'terra, água, vida', now(), now());

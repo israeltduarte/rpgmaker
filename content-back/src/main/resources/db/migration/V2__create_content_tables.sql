@@ -65,22 +65,22 @@ CREATE TABLE public.itpower_ideas
 ALTER TABLE public.itpower_ideas
     OWNER TO postgres;
 
-CREATE TABLE public.weapon_notes
+CREATE TABLE public.itweapon_notes
 (
     itweapon_id VARCHAR(255) NOT NULL
         CONSTRAINT fkb2py6palsbhciul7bua9kvrmy REFERENCES public.itweapon,
     notes       VARCHAR(255)
 );
 
-ALTER TABLE public.weapon_notes
+ALTER TABLE public.itweapon_notes
     OWNER TO postgres;
 
-CREATE TABLE public.weapon_titles
+CREATE TABLE public.itweapon_titles
 (
     itweapon_id VARCHAR(255) NOT NULL
         CONSTRAINT fka5h5007hfve5dsloy5u6e3wwh REFERENCES public.itweapon,
     titles      VARCHAR(255)
 );
 
-ALTER TABLE public.weapon_titles
+ALTER TABLE public.itweapon_titles
     OWNER TO postgres;
