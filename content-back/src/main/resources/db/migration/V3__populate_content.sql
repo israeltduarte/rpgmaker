@@ -20,7 +20,6 @@ INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('R
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'estrela', 3, 'gas, luz, magnetismo', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'sol', 3, 'estrela, fogo, magnetismo', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'som', 3, 'vento, energia, vento', now(), now());
--- INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'corte', 3, 'vento, energia, vento', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'pedra', 3, 'pedra, pedra, pedra', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'terra', 3, 'pedra, vento, água', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'planta', 3, 'terra, água, vida', now(), now());
@@ -66,7 +65,6 @@ INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('R
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'vida', 3, 'vida, vida, vida', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'cura', 3, 'vida, energia, vida', now(), now());
 INSERT INTO itpower (id, name, category, particles, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'morte', 3, 'morte, morte, morte', now(), now());
-
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'espadas', 2, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'escudos', 2, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'borracha', 2, now(), now());
@@ -86,7 +84,6 @@ INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_'
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'transformação em criaturas mágicas', 2, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'transformação em criaturas míticas', 2, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'transformação em criaturas divinas', 2, now(), now());
-
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'força', 1, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'velocidade', 1, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'elasticidade', 1, now(), now());
@@ -97,7 +94,6 @@ INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_'
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'olfato', 1, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'capacidades físicas aumentadas', 1, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'petrificação', 1, now(), now());
-
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'telecinese', 0, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'controle mental', 0, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'telepatia', 0, now(), now());
@@ -105,13 +101,15 @@ INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_'
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'aprendizado', 0, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'precognição', 0, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'retrocognição', 0, now(), now());
-
 INSERT INTO itpower_ideas (itpower_id, ideas) VALUES ((SELECT id FROM itpower WHERE name = 'fogo'), 'torre de fogo');
 INSERT INTO itpower_ideas (itpower_id, ideas) VALUES ((SELECT id FROM itpower WHERE name = 'fogo'), 'soco de fogo');
 
 INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character1', 0, 'vini', 'achieve revenge', null, 10000, now(), now());
 INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character2', 0, 'jow', 'gain power', null, 20000, now(), now());
 INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character3', 0, 'luiza', 'make friends', (SELECT id FROM itpower WHERE itpower.name = 'escuridão'), 30000, now(), now());
-
 INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Note for Character1'), ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Another note for Character1'), ((SELECT id FROM itcharacter WHERE name = 'Character2'), 'Note for Character2');
+
+INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Group1', 'a first group', 'Mark Wickers', now(), now());
+INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note1'), ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note2');
+
 

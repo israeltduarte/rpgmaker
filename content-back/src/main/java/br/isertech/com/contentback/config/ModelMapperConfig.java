@@ -1,9 +1,11 @@
 package br.isertech.com.contentback.config;
 
 import br.isertech.com.contentback.dto.ITCharacterDTO;
+import br.isertech.com.contentback.dto.ITGroupDTO;
 import br.isertech.com.contentback.dto.ITPowerDTO;
 import br.isertech.com.contentback.dto.ITWeaponDTO;
 import br.isertech.com.contentback.entity.ITCharacter;
+import br.isertech.com.contentback.entity.ITGroup;
 import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.entity.ITWeapon;
 import org.modelmapper.ModelMapper;
@@ -28,6 +30,7 @@ public class ModelMapperConfig {
         convertFromITCharacterDTOToITCharacter(mapper);
         convertFromITPowerDTOToITPower(mapper);
         convertFromITWeaponDTOToITWeapon(mapper);
+        convertFromITGroupDTOToITGroup(mapper);
 
         return mapper;
     }
@@ -66,6 +69,17 @@ public class ModelMapperConfig {
             mapping.map(ITWeaponDTO::getTitles, ITWeapon::setTitles);
             mapping.map(ITWeaponDTO::getOwner, ITWeapon::setOwner);
             mapping.map(ITWeaponDTO::getPower, ITWeapon::setPower);
+        });
+    }
+
+    private void convertFromITGroupDTOToITGroup(ModelMapper mapper) {
+        mapper.createTypeMap(ITGroupDTO.class, ITGroup.class).addMappings(mapping -> {
+            mapping.map(ITGroupDTO::getName, ITGroup::setName);
+            mapping.map(ITGroupDTO::getLeader, ITGroup::setLeader);
+            mapping.map(ITGroupDTO::getDescription, ITGroup::setDescription);
+            mapping.map(ITGroupDTO::getNotes, ITGroup::setNotes);
+            mapping.map(ITGroupDTO::getCreated, ITGroup::setCreated);
+            mapping.map(ITGroupDTO::getUpdated, ITGroup::setUpdated);
         });
     }
 }

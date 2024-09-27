@@ -1,9 +1,6 @@
 package br.isertech.com.contentback.error;
 
-import br.isertech.com.contentback.error.exception.CharacterNotFoundException;
-import br.isertech.com.contentback.error.exception.OperationFailedException;
-import br.isertech.com.contentback.error.exception.PowerNotFoundException;
-import br.isertech.com.contentback.error.exception.WeaponNotFoundException;
+import br.isertech.com.contentback.error.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -46,6 +43,17 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PowerNotFoundException.class)
     public ResponseEntity<CustomErrorResponse> powerNotFound(Exception e) {
+
+        CustomErrorResponse errors = CustomErrorResponse.builder()
+                .message(e.getMessage())
+                .status(HttpStatus.NOT_FOUND.value())
+                .build();
+
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(GroupNotFoundException.class)
+    public ResponseEntity<CustomErrorResponse> groupNotFound(Exception e) {
 
         CustomErrorResponse errors = CustomErrorResponse.builder()
                 .message(e.getMessage())
