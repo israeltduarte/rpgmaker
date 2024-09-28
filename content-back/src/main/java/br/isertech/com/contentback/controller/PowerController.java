@@ -1,6 +1,7 @@
 package br.isertech.com.contentback.controller;
 
 import br.isertech.com.contentback.dto.ITPowerDTO;
+import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.service.PowerService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class PowerController {
     public ResponseEntity<List<ITPower>> getAllPowers() {
 
         List<ITPower> powers = powerService.getAllPowers();
+        if (!powers.isEmpty()) {
+            for (ITPower power : powers) {
+                power.add(linkTo(methodOn(CharacterController.class).getCharacterById(power.getId())).withSelfRel());
+            }
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(powers);
     }

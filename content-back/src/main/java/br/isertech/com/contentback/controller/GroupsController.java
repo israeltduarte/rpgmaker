@@ -1,6 +1,7 @@
 package br.isertech.com.contentback.controller;
 
 import br.isertech.com.contentback.dto.ITGroupDTO;
+import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITGroup;
 import br.isertech.com.contentback.service.GroupService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -22,6 +26,11 @@ public class GroupsController {
     public ResponseEntity<List<ITGroup>> getAllGroups() {
 
         List<ITGroup> groups = groupService.getAllGroups();
+        if (!groups.isEmpty()) {
+            for (ITGroup group : groups) {
+                group.add(linkTo(methodOn(CharacterController.class).getCharacterById(group.getId())).withSelfRel());
+            }
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(groups);
     }

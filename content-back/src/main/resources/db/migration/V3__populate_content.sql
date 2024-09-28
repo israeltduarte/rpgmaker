@@ -107,9 +107,63 @@ INSERT INTO itpower_ideas (itpower_id, ideas) VALUES ((SELECT id FROM itpower WH
 INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character1', 0, 'vini', 'achieve revenge', null, 10000, now(), now());
 INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character2', 0, 'jow', 'gain power', null, 20000, now(), now());
 INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character3', 0, 'luiza', 'make friends', (SELECT id FROM itpower WHERE itpower.name = 'escuridão'), 30000, now(), now());
-INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Note for Character1'), ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Another note for Character1'), ((SELECT id FROM itcharacter WHERE name = 'Character2'), 'Note for Character2');
+INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Note for Character1'), ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Another note for Character1');
+INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character2'), 'Note for Character2');
 
 INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Group1', 'a first group', 'Mark Wickers', now(), now());
-INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note1'), ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note2');
+INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note1');
+INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note2');
+
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Ruptura', 0, 10000, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Tormenta', 3, 9999, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Vix', 5, 9998, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Gloriosa', 1, 9997, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Portão', 9, 9996, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Olho do Caçador', 5, 9995, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Lâmina Desafiadora', 2, 9994, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Guardião do Altar', 11, 9993, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Eco das Eras', 10, 9992, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Lâmina do Vento', 1, 9991, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Fio da Noite', 4, 9990, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Profunda', 2, 9899, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Ossada', 8, 9898, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Dente de Umbra', 3, 9897, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Sangue de Caius', 2, 9896, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Luz Sagrada, a Espada Sacrossanta do Arcanjo', 1, 12000, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Barreira, o Escudo Sacrossanto da Proteção Divina', 11, 11000, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Destino, o Arco Sacrossanto da Justiça', 5, 10001, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Triunfo, a Lança Sacrossanta da Santidade', 3, 10500, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Puro, o Cajado Sacrossanto da Pureza Divina', 10, 11500, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Pandora, o Sino Sacrossanto da Esperança', 12, 9500, 'DESCONHECIDO', now(), now());
+INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Portões, o Martelo Sacrossanto da Ordem', 8, 11001, 'DESCONHECIDO', now(), now());
+
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'Arco da Ascenção');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'Arco do Infinito');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'É uma arma que sobe de nível');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Gloriosa'), 'Diz a lenda que ela foi a responsável por partir os céus durante a separação dos países');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Portão'), 'O Martelo da Ordem');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Profunda'), 'A Lâmina das Profundezas');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Profunda'), 'Ela possui uma lâmina de cor azul marinho, de rocha oceânica. Diz a lenda que ela é capaz de cortar oceanos. Quanto mais se prolonga o combate, mais poderosa ela fica.');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Dente de Umbra'), 'Umbra era um dragão antigo conhecido como O Senhor da Escuridão');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Portão'), 'É uma réplica de uma arma sacrossanta anciã');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Luz Sagrada possui lâmina de aço celeste com alma de arcanjo.');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Alto poder destrutivo contra seres das trevas.');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Conexão com o portador revela poderes adicionais.');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Procura usuários com magia de luz.');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Bônus contra trevas, remoção de maldições, bônus de defesa e iluminação.');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Paladinos ganham mais poder ao usá-la.');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'A Espada da Luz');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Barreira, o Escudo Sacrossanto da Proteção Divina'), 'Escudo gerado por Uriel, o Arcanjo dos Portões; Diminui o dano recebido pelo usuário e seus aliados.');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Barreira, o Escudo Sacrossanto da Proteção Divina'), 'O Escudo da Proteção');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Destino, o Arco Sacrossanto da Justiça'), 'Arco gerado por Liriel, a Arcanja da Retidão; Multiplica as flechas, permitindo acertos em área.');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Destino, o Arco Sacrossanto da Justiça'), 'O Arco da Justiça');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Triunfo, a Lança Sacrossanta da Santidade'), 'Lança gerada por Remiel, o Arcanjo da Pureza; Acerto garantido, dano triplicado, sente a pureza no coração dos outros.');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Triunfo, a Lança Sacrossanta da Santidade'), 'A Lança da Santidade');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Puro, o Cajado Sacrossanto da Pureza Divina'), 'Cajado gerado por Galadriel, o Arcanjo da Cura; Concede imortalidade temporária e grande aumento de poder mágico.');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Puro, o Cajado Sacrossanto da Pureza Divina'), 'O Cajado da Pureza');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Pandora, o Sino Sacrossanto da Esperança'), 'Sino gerado por Seleniel, a Arcanja das Canções; Concede bônus em CA, TAC0, vida, dano, cura, resistência e magias para o portador e seus aliados.');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Pandora, o Sino Sacrossanto da Esperança'), 'O Sino da Esperança');
+INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Portões, o Martelo Sacrossanto da Ordem'), 'Martelo gerado por Rafiel, o Arcanjo Juíz; Causa um dano estrondoso.');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Portões, o Martelo Sacrossanto da Ordem'), 'O Martelo da Ordem');
 
 

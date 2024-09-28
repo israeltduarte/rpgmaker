@@ -17,7 +17,8 @@ public enum ITWeaponType {
     AXE("AXE"),
     TWO_HEADS_AXE("TWO_HEADS_AXE"),
     ROD("ROD"),
-    SHIELD("SHIELD");
+    BELL("BELL")
+    ;
 
     ITWeaponType(String label) {
         this.label = label;

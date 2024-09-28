@@ -31,9 +31,9 @@ public class ITWeapon extends RepresentationModel<ITWeapon> implements Serializa
             parameters = @Parameter(name = "prefix", value = "ITWeapon")
     )
     private String id;
-
     private String name;
     private ITWeaponType type;
+    @Column(unique = true)
     private Long power;
     private String owner;
 

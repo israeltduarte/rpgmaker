@@ -32,11 +32,11 @@ public class WeaponService {
         return weapons;
     }
 
-    public List<ITWeapon> getMostPowerfulCharacters() {
+    public List<ITWeapon> getMostPowerfulPowers() {
 
         List<ITWeapon> weapons = weaponRepository.findTop10ByOrderByPowerDesc();
 
-        log.info("WeaponService - getMostPowerfulCharacters() - List<ITWeapon>={}", weapons);
+        log.info("WeaponService - getMostPowerfulPowers() - List<ITWeapon>={}", weapons);
 
         return weapons;
     }
@@ -44,7 +44,7 @@ public class WeaponService {
     public ITWeapon getWeaponById(String id) {
 
         ITWeapon weapon = weaponRepository.findById(id)
-                .orElseThrow(() -> new WeaponNotFoundException(Messages.CHARACTER_NOT_FOUND_INFO));
+                .orElseThrow(() -> new WeaponNotFoundException(Messages.WEAPON_NOT_FOUND_INFO));
 
         log.info("WeaponService - getWeaponById() - ITWeapon={}", weapon);
 

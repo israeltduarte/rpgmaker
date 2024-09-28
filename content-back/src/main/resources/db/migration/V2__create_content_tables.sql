@@ -12,6 +12,16 @@ CREATE TABLE public.itpower
 ALTER TABLE public.itpower
     OWNER TO postgres;
 
+CREATE TABLE public.itpower_ideas
+(
+    itpower_id VARCHAR(255) NOT NULL
+        CONSTRAINT fkllcimmpqxhikwq5d5ye1th2t6 REFERENCES public.itpower,
+    ideas      VARCHAR(255)
+);
+
+ALTER TABLE public.itpower_ideas
+    OWNER TO postgres;
+
 CREATE TABLE public.itcharacter
 (
     id         VARCHAR(255) NOT NULL PRIMARY KEY,
@@ -45,7 +55,7 @@ CREATE TABLE public.itweapon
     id      VARCHAR(255) NOT NULL PRIMARY KEY,
     name    VARCHAR(255),
     owner   VARCHAR(255),
-    power   BIGINT,
+    power   BIGINT UNIQUE,
     type    SMALLINT
         CONSTRAINT itweapon_type_check CHECK ((type >= 0) AND (type <= 12)),
     updated TIMESTAMP(6),
@@ -53,16 +63,6 @@ CREATE TABLE public.itweapon
 );
 
 ALTER TABLE public.itweapon
-    OWNER TO postgres;
-
-CREATE TABLE public.itpower_ideas
-(
-    itpower_id VARCHAR(255) NOT NULL
-        CONSTRAINT fkllcimmpqxhikwq5d5ye1th2t6 REFERENCES public.itpower,
-    ideas      VARCHAR(255)
-);
-
-ALTER TABLE public.itpower_ideas
     OWNER TO postgres;
 
 CREATE TABLE public.itweapon_notes

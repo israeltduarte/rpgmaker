@@ -25,14 +25,19 @@ public class WeaponController {
     public ResponseEntity<List<ITWeapon>> getAllWeapons() {
 
         List<ITWeapon> weapons = weaponService.getAllWeapons();
+        if (!weapons.isEmpty()) {
+            for (ITWeapon weapon : weapons) {
+                weapon.add(linkTo(methodOn(CharacterController.class).getCharacterById(weapon.getId())).withSelfRel());
+            }
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(weapons);
     }
 
     @GetMapping("/most-powerful")
-    public ResponseEntity<List<ITWeapon>> getMostPowerfulWeapons() {
+    public ResponseEntity<List<ITWeapon>> getMostPowerfulPowers() {
 
-        List<ITWeapon> weapons = weaponService.getMostPowerfulCharacters();
+        List<ITWeapon> weapons = weaponService.getMostPowerfulPowers();
 
         return ResponseEntity.status(HttpStatus.OK).body(weapons);
     }
