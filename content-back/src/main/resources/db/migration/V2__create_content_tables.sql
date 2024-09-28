@@ -91,7 +91,6 @@ CREATE TABLE public.itgroup
     name        VARCHAR(255),
     leader      VARCHAR(255),
     description VARCHAR(255),
-    notes       VARCHAR(255),
     updated     TIMESTAMP(6),
     created     TIMESTAMP(6)
 );

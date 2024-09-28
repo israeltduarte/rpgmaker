@@ -110,9 +110,11 @@ INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updat
 INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Note for Character1'), ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Another note for Character1');
 INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character2'), 'Note for Character2');
 
-INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Group1', 'a first group', 'Mark Wickers', now(), now());
-INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note1');
-INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Group1'), 'Note2');
+INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Gloriosa', 'Grupo de guerreiros espadachins, adoradores de uma espada antiga conhecida como Gloriosa', '', now(), now());
+INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Senado', 'Grupo de quatro Senadores escolhidos por cada região do país para governar', '', now(), now());
+INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Silêncio', 'São caçadores de pessoas com magia, que acreditam que ela deve ser silenciada', '', now(), now());
+INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Arcanistas', 'São adoradores de pessoas com magia, que acreditam que o futuro é mágico', '', now(), now());
+INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Gloriosa'), 'são adoradores de uma espada antiga que dizem que partiu os céus, separando os países');
 
 INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Ruptura', 0, 10000, 'DESCONHECIDO', now(), now());
 INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Tormenta', 3, 9999, 'DESCONHECIDO', now(), now());
@@ -165,5 +167,3 @@ INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon
 INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Pandora, o Sino Sacrossanto da Esperança'), 'O Sino da Esperança');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Portões, o Martelo Sacrossanto da Ordem'), 'Martelo gerado por Rafiel, o Arcanjo Juíz; Causa um dano estrondoso.');
 INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Portões, o Martelo Sacrossanto da Ordem'), 'O Martelo da Ordem');
-
-
