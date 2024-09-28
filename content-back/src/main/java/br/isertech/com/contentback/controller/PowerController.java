@@ -5,6 +5,8 @@ import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.service.PowerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +25,9 @@ public class PowerController {
     private final PowerService powerService;
 
     @GetMapping
-    public ResponseEntity<List<ITPower>> getAllPowers() {
+    public ResponseEntity<Page<ITPower>> getAllPowers(Pageable pageable) {
 
-        List<ITPower> powers = powerService.getAllPowers();
+        Page<ITPower> powers = powerService.getAllPowers(pageable);
         if (!powers.isEmpty()) {
             for (ITPower power : powers) {
                 power.add(linkTo(methodOn(CharacterController.class).getCharacterById(power.getId())).withSelfRel());

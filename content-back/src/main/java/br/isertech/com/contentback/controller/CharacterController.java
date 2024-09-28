@@ -4,6 +4,8 @@ import br.isertech.com.contentback.dto.ITCharacterDTO;
 import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.service.CharacterService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +24,9 @@ public class CharacterController {
     private final CharacterService characterService;
 
     @GetMapping
-    public ResponseEntity<List<ITCharacter>> getAllCharacters() {
+    public ResponseEntity<Page<ITCharacter>> getAllCharacters(Pageable pageable) {
 
-        List<ITCharacter> characters = characterService.getAllCharacters();
+        Page<ITCharacter> characters = characterService.getAllCharacters(pageable);
         if (!characters.isEmpty()) {
             for (ITCharacter character : characters) {
                 character.add(linkTo(methodOn(CharacterController.class).getCharacterById(character.getId())).withSelfRel());

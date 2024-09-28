@@ -3,12 +3,16 @@ package br.isertech.com.contentback.service;
 import br.isertech.com.contentback.constants.Messages;
 import br.isertech.com.contentback.dto.ITWeaponDTO;
 import br.isertech.com.contentback.entity.ITWeapon;
+import br.isertech.com.contentback.error.exception.SortAttributesInvalidException;
 import br.isertech.com.contentback.error.exception.WeaponNotFoundException;
 import br.isertech.com.contentback.repository.WeaponRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,11 +27,17 @@ public class WeaponService {
     private final WeaponRepository weaponRepository;
     private final ModelMapper mapper;
 
-    public List<ITWeapon> getAllWeapons() {
+    public Page<ITWeapon> getAllWeapons(Pageable pageable) {
 
-        List<ITWeapon> weapons = weaponRepository.findAll();
+        Page<ITWeapon> weapons;
 
-        log.info("WeaponService - getAllWeapons() - List<ITWeapon>={}", weapons);
+        try {
+            weapons = weaponRepository.findAll(pageable);
+        } catch (PropertyReferenceException e) {
+            throw new SortAttributesInvalidException(Messages.SORT_ATTRIBUTES_INVALID);
+        }
+
+        log.info("WeaponService - getAllWeapons() - Page<ITWeapon>={}", weapons);
 
         return weapons;
     }

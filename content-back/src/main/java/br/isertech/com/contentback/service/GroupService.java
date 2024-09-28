@@ -4,15 +4,18 @@ import br.isertech.com.contentback.constants.Messages;
 import br.isertech.com.contentback.dto.ITGroupDTO;
 import br.isertech.com.contentback.entity.ITGroup;
 import br.isertech.com.contentback.error.exception.GroupNotFoundException;
+import br.isertech.com.contentback.error.exception.SortAttributesInvalidException;
 import br.isertech.com.contentback.repository.GroupRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 
 @Slf4j
@@ -25,11 +28,17 @@ public class GroupService {
     private final ModelMapper mapper;
     private final Random random = new Random();
 
-    public List<ITGroup> getAllGroups() {
+    public Page<ITGroup> getAllGroups(Pageable pageable) {
 
-        List<ITGroup> groups = groupRepository.findAll();
+        Page<ITGroup> groups;
 
-        log.info("GroupService - getAllGroups() - List<ITGroup>={}", groups);
+        try {
+            groups = groupRepository.findAll(pageable);
+        } catch (PropertyReferenceException e) {
+            throw new SortAttributesInvalidException(Messages.SORT_ATTRIBUTES_INVALID);
+        }
+
+        log.info("GroupService - getAllGroups() - Page<ITGroup>={}", groups);
 
         return groups;
     }

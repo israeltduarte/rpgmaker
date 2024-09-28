@@ -6,11 +6,15 @@ import br.isertech.com.contentback.dto.ITCharacterDTO;
 import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.error.exception.CharacterNotFoundException;
+import br.isertech.com.contentback.error.exception.SortAttributesInvalidException;
 import br.isertech.com.contentback.repository.CharacterRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,11 +31,17 @@ public class CharacterService {
     private final ModelMapper mapper;
     private final PowerService powerService;
 
-    public List<ITCharacter> getAllCharacters() {
+    public Page<ITCharacter> getAllCharacters(Pageable pageable) {
 
-        List<ITCharacter> characters = characterRepository.findAll();
+        Page<ITCharacter> characters;
 
-        log.info("CharacterService - getAllCharacters() - List<ITCharacter>={}", characters);
+        try {
+            characters = characterRepository.findAll(pageable);
+        } catch (PropertyReferenceException e) {
+            throw new SortAttributesInvalidException(Messages.SORT_ATTRIBUTES_INVALID);
+        }
+
+        log.info("CharacterService - getAllCharacters() - Page<ITCharacter>={}", characters);
 
         return characters;
     }

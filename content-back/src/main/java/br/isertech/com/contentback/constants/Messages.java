@@ -13,5 +13,7 @@ public class Messages {
     public static final String POWER_NOT_FOUND_INFO = "Power not found";
     public static final String POWERS_DELETED = "All Powers deleted";
     public static final String POWER_DELETED = "Power deleted";
+    public static final String SORT_ATTRIBUTES_INVALID = "Invalid sort attributes";
+
 
 }

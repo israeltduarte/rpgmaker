@@ -4,15 +4,18 @@ import br.isertech.com.contentback.constants.Messages;
 import br.isertech.com.contentback.dto.ITPowerDTO;
 import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.error.exception.PowerNotFoundException;
+import br.isertech.com.contentback.error.exception.SortAttributesInvalidException;
 import br.isertech.com.contentback.repository.PowerRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
 
 @Slf4j
@@ -25,11 +28,17 @@ public class PowerService {
     private final ModelMapper mapper;
     private final Random random = new Random();
 
-    public List<ITPower> getAllPowers() {
+    public Page<ITPower> getAllPowers(Pageable pageable) {
 
-        List<ITPower> powers = powerRepository.findAll();
+        Page<ITPower> powers;
 
-        log.info("PowerService - getAllPowers() - List<ITPower>={}", powers);
+        try {
+            powers = powerRepository.findAll(pageable);
+        } catch (PropertyReferenceException e) {
+            throw new SortAttributesInvalidException(Messages.SORT_ATTRIBUTES_INVALID);
+        }
+
+        log.info("PowerService - getAllPowers() - Page<ITPower>={}", powers);
 
         return powers;
     }

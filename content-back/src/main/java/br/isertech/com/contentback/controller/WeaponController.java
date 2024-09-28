@@ -4,6 +4,8 @@ import br.isertech.com.contentback.dto.ITWeaponDTO;
 import br.isertech.com.contentback.entity.ITWeapon;
 import br.isertech.com.contentback.service.WeaponService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +24,9 @@ public class WeaponController {
     private final WeaponService weaponService;
 
     @GetMapping
-    public ResponseEntity<List<ITWeapon>> getAllWeapons() {
+    public ResponseEntity<Page<ITWeapon>> getAllWeapons(Pageable pageable) {
 
-        List<ITWeapon> weapons = weaponService.getAllWeapons();
+        Page<ITWeapon> weapons = weaponService.getAllWeapons(pageable);
         if (!weapons.isEmpty()) {
             for (ITWeapon weapon : weapons) {
                 weapon.add(linkTo(methodOn(CharacterController.class).getCharacterById(weapon.getId())).withSelfRel());

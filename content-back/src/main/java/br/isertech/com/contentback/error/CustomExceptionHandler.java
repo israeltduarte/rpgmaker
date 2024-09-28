@@ -73,4 +73,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(SortAttributesInvalidException.class)
+    public ResponseEntity<CustomErrorResponse> sortAttributesInvalid(Exception e) {
+
+        CustomErrorResponse errors = CustomErrorResponse.builder()
+                .message(e.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .build();
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
 }

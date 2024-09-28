@@ -5,6 +5,8 @@ import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITGroup;
 import br.isertech.com.contentback.service.GroupService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +25,9 @@ public class GroupsController {
     private final GroupService groupService;
 
     @GetMapping
-    public ResponseEntity<List<ITGroup>> getAllGroups() {
+    public ResponseEntity<Page<ITGroup>> getAllGroups(Pageable pageable) {
 
-        List<ITGroup> groups = groupService.getAllGroups();
+        Page<ITGroup> groups = groupService.getAllGroups(pageable);
         if (!groups.isEmpty()) {
             for (ITGroup group : groups) {
                 group.add(linkTo(methodOn(CharacterController.class).getCharacterById(group.getId())).withSelfRel());
