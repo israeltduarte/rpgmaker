@@ -26,6 +26,7 @@ public class ModelMapperConfig {
         convertFromITWeaponDTOToITWeapon(mapper);
         convertFromITGroupDTOToITGroup(mapper);
         convertFromITCityDTOToITCity(mapper);
+        convertFromITOpponentDTOToITOpponent(mapper);
 
         return mapper;
     }
@@ -57,12 +58,12 @@ public class ModelMapperConfig {
         mapper.createTypeMap(ITWeaponDTO.class, ITWeapon.class).addMappings(mapping -> {
             mapping.map(ITWeaponDTO::getName, ITWeapon::setName);
             mapping.map(ITWeaponDTO::getType, ITWeapon::setType);
-            mapping.map(ITWeaponDTO::getUpdated, ITWeapon::setUpdated);
-            mapping.map(ITWeaponDTO::getCreated, ITWeapon::setCreated);
             mapping.map(ITWeaponDTO::getNotes, ITWeapon::setNotes);
             mapping.map(ITWeaponDTO::getTitles, ITWeapon::setTitles);
             mapping.map(ITWeaponDTO::getOwner, ITWeapon::setOwner);
             mapping.map(ITWeaponDTO::getPower, ITWeapon::setPower);
+            mapping.map(ITWeaponDTO::getUpdated, ITWeapon::setUpdated);
+            mapping.map(ITWeaponDTO::getCreated, ITWeapon::setCreated);
         });
     }
 
@@ -88,6 +89,22 @@ public class ModelMapperConfig {
             mapping.map(ITCityDTO::getPeople, ITCity::setPeople);
             mapping.map(ITCityDTO::getPlaces, ITCity::setPlaces);
             mapping.map(ITCityDTO::getNotes, ITCity::setNotes);
+            mapping.map(ITCityDTO::getUpdated, ITCity::setUpdated);
+            mapping.map(ITCityDTO::getCreated, ITCity::setCreated);
+        });
+    }
+
+    private void convertFromITOpponentDTOToITOpponent(ModelMapper mapper) {
+        mapper.createTypeMap(ITOpponentDTO.class, ITOpponent.class).addMappings(mapping -> {
+            mapping.map(ITOpponentDTO::getName, ITOpponent::setName);
+            mapping.map(ITOpponentDTO::getPower, ITOpponent::setPower);
+            mapping.map(ITOpponentDTO::getHp, ITOpponent::setHp);
+            mapping.map(ITOpponentDTO::getTac0, ITOpponent::setTac0);
+            mapping.map(ITOpponentDTO::getCa, ITOpponent::setCa);
+            mapping.map(ITOpponentDTO::getAbilities, ITOpponent::setAbilities);
+            mapping.map(ITOpponentDTO::getWeapons, ITOpponent::setWeapons);
+            mapping.map(ITOpponentDTO::getUpdated, ITOpponent::setUpdated);
+            mapping.map(ITOpponentDTO::getCreated, ITOpponent::setCreated);
         });
     }
 }

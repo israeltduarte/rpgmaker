@@ -107,4 +107,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(OpponentNotFoundException.class)
+    public ResponseEntity<CustomErrorResponse> opponentNotFound(Exception e) {
+
+        CustomErrorResponse errors = CustomErrorResponse.builder()
+                .message(e.getMessage())
+                .status(HttpStatus.NOT_FOUND.value())
+                .build();
+
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
 }

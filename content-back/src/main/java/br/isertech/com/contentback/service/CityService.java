@@ -16,7 +16,6 @@ import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Random;
 
 @Slf4j
 @Service
@@ -26,7 +25,6 @@ public class CityService {
 
     private final CityRepository cityRepository;
     private final ModelMapper mapper;
-    private final Random random = new Random();
 
     public Page<ITCity> getAllCities(Pageable pageable) {
 
@@ -67,14 +65,14 @@ public class CityService {
 
         LocalDateTime time = LocalDateTime.now();
 
-        ITCity city = mapper.map(dto,ITCity.class);
+        ITCity city = mapper.map(dto, ITCity.class);
         city.setCreated(time);
         city.setUpdated(time);
 
         return city;
     }
 
-    public ITCity updateCity(String cityId,ITCityDTO dto) {
+    public ITCity updateCity(String cityId, ITCityDTO dto) {
 
         ITCity city = cityRepository.findById(cityId)
                 .orElseThrow(() -> new CityNotFoundException(Messages.CITY_NOT_FOUND_INFO));

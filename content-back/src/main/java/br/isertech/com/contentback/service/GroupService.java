@@ -16,7 +16,6 @@ import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Random;
 
 @Slf4j
 @Service
@@ -26,7 +25,6 @@ public class GroupService {
 
     private final GroupRepository groupRepository;
     private final ModelMapper mapper;
-    private final Random random = new Random();
 
     public Page<ITGroup> getAllGroups(Pageable pageable) {
 

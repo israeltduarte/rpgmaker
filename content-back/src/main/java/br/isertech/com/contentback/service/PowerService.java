@@ -26,7 +26,6 @@ public class PowerService {
 
     private final PowerRepository powerRepository;
     private final ModelMapper mapper;
-    private final Random random = new Random();
 
     public Page<ITPower> getAllPowers(Pageable pageable) {
 

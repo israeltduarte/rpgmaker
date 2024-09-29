@@ -18,5 +18,8 @@ public class Messages {
     public static final String CITY_NOT_FOUND_INFO = "City not found";
     public static final String CITIES_DELETED = "All Cities deleted";
     public static final String CITY_DELETED = "City deleted";
+    public static final String OPPONENT_NOT_FOUND_INFO = "Opponent not found";
+    public static final String OPPONENTS_DELETED = "All Opponents deleted";
+    public static final String OPPONENT_DELETED = "Opponent deleted";
 
 }

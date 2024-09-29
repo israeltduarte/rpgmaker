@@ -12,17 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ITCityDTO {
+public class ITOpponentDTO {
 
     private String name;
-    private String title;
-    private String leader;
-    private String size;
-    private List<String> places;
-    private List<String> people;
-    private List<String> groups;
-    private List<String> curiosities;
-    private List<String> notes;
+    private String power;
+    private Integer hp;
+    private Integer tac0;
+    private Integer ca;
+    private List<String> weapons;
+    private List<String> abilities;
     private LocalDateTime created;
     private LocalDateTime updated;
 
