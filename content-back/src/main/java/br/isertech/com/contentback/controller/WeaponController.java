@@ -29,7 +29,7 @@ public class WeaponController {
         Page<ITWeapon> weapons = weaponService.getAllWeapons(pageable);
         if (!weapons.isEmpty()) {
             for (ITWeapon weapon : weapons) {
-                weapon.add(linkTo(methodOn(CharacterController.class).getCharacterById(weapon.getId())).withSelfRel());
+                weapon.add(linkTo(methodOn(WeaponController.class).getWeaponById(weapon.getId())).withSelfRel());
             }
         }
 

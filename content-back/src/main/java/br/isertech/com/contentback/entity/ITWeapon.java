@@ -1,6 +1,6 @@
 package br.isertech.com.contentback.entity;
 
-import br.isertech.com.contentback.enums.ITWeaponType;
+import br.isertech.com.contentback.enums.ITWeaponTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,7 +32,7 @@ public class ITWeapon extends RepresentationModel<ITWeapon> implements Serializa
     )
     private String id;
     private String name;
-    private ITWeaponType type;
+    private ITWeaponTypeEnum type;
     @Column(unique = true)
     private Long power;
     private String owner;

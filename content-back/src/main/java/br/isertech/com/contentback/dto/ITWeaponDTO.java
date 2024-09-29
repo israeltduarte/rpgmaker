@@ -1,6 +1,6 @@
 package br.isertech.com.contentback.dto;
 
-import br.isertech.com.contentback.enums.ITWeaponType;
+import br.isertech.com.contentback.enums.ITWeaponTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ITWeaponDTO {
 
     private String name;
-    private ITWeaponType type;
+    private ITWeaponTypeEnum type;
     private Long power;
     private String owner;
     private List<String> titles;

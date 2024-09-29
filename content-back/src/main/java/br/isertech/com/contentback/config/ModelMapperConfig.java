@@ -1,13 +1,7 @@
 package br.isertech.com.contentback.config;
 
-import br.isertech.com.contentback.dto.ITCharacterDTO;
-import br.isertech.com.contentback.dto.ITGroupDTO;
-import br.isertech.com.contentback.dto.ITPowerDTO;
-import br.isertech.com.contentback.dto.ITWeaponDTO;
-import br.isertech.com.contentback.entity.ITCharacter;
-import br.isertech.com.contentback.entity.ITGroup;
-import br.isertech.com.contentback.entity.ITPower;
-import br.isertech.com.contentback.entity.ITWeapon;
+import br.isertech.com.contentback.dto.*;
+import br.isertech.com.contentback.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +25,7 @@ public class ModelMapperConfig {
         convertFromITPowerDTOToITPower(mapper);
         convertFromITWeaponDTOToITWeapon(mapper);
         convertFromITGroupDTOToITGroup(mapper);
+        convertFromITCityDTOToITCity(mapper);
 
         return mapper;
     }
@@ -41,7 +36,6 @@ public class ModelMapperConfig {
             mapping.map(ITCharacterDTO::getType, ITCharacter::setType);
             mapping.map(ITCharacterDTO::getReward, ITCharacter::setReward);
             mapping.map(ITCharacterDTO::getGoal, ITCharacter::setGoal);
-            mapping.map(ITCharacterDTO::getPlayer, ITCharacter::setPlayer);
             mapping.map(ITCharacterDTO::getNotes, ITCharacter::setNotes);
             mapping.map(ITCharacterDTO::getUpdated, ITCharacter::setUpdated);
             mapping.map(ITCharacterDTO::getCreated, ITCharacter::setCreated);
@@ -80,6 +74,20 @@ public class ModelMapperConfig {
             mapping.map(ITGroupDTO::getNotes, ITGroup::setNotes);
             mapping.map(ITGroupDTO::getCreated, ITGroup::setCreated);
             mapping.map(ITGroupDTO::getUpdated, ITGroup::setUpdated);
+        });
+    }
+
+    private void convertFromITCityDTOToITCity(ModelMapper mapper) {
+        mapper.createTypeMap(ITCityDTO.class, ITCity.class).addMappings(mapping -> {
+            mapping.map(ITCityDTO::getName, ITCity::setName);
+            mapping.map(ITCityDTO::getTitle, ITCity::setTitle);
+            mapping.map(ITCityDTO::getLeader, ITCity::setLeader);
+            mapping.map(ITCityDTO::getSize, ITCity::setSize);
+            mapping.map(ITCityDTO::getCuriosities, ITCity::setCuriosities);
+            mapping.map(ITCityDTO::getGroups, ITCity::setGroups);
+            mapping.map(ITCityDTO::getPeople, ITCity::setPeople);
+            mapping.map(ITCityDTO::getPlaces, ITCity::setPlaces);
+            mapping.map(ITCityDTO::getNotes, ITCity::setNotes);
         });
     }
 }

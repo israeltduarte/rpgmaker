@@ -5,6 +5,7 @@ import br.isertech.com.contentback.constants.Messages;
 import br.isertech.com.contentback.dto.ITCharacterDTO;
 import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITPower;
+import br.isertech.com.contentback.error.exception.CharacterAttributesInvalidException;
 import br.isertech.com.contentback.error.exception.CharacterNotFoundException;
 import br.isertech.com.contentback.error.exception.SortAttributesInvalidException;
 import br.isertech.com.contentback.repository.CharacterRepository;
@@ -67,11 +68,7 @@ public class CharacterService {
 
     public ITCharacter addCharacter(ITCharacterDTO dto) {
 
-        ITCharacter character = getNewCharacterEntityReady(dto);
-        if (dto.getPowerId() != null) {
-            ITPower power = powerService.getPowerById(dto.getPowerId());
-            character.setPower(power);
-        }
+        ITCharacter character = prepareNewEntity(dto);
 
         character = characterRepository.save(character);
 
@@ -80,11 +77,26 @@ public class CharacterService {
         return character;
     }
 
-    private ITCharacter getNewCharacterEntityReady(ITCharacterDTO dto) {
-
-        LocalDateTime time = LocalDateTime.now();
+    private ITCharacter prepareNewEntity(ITCharacterDTO dto) {
 
         ITCharacter character = mapper.map(dto, ITCharacter.class);
+
+        switch (dto.getType()) {
+            case PDM -> {
+                character.setIsRival(dto.getIsRival());
+            }
+            case PDJ -> {
+                character.setPlayerName(dto.getPlayerName());
+            }
+            default -> throw new CharacterAttributesInvalidException(Messages.CHARACTER_ATTRIBUTES_INVALID);
+        }
+
+        if (dto.getPowerId() != null && !dto.getPowerId().isEmpty()) {
+            ITPower power = powerService.getPowerById(dto.getPowerId());
+            character.setPower(power);
+        }
+
+        LocalDateTime time = LocalDateTime.now();
         character.setCreated(time);
         character.setUpdated(time);
 

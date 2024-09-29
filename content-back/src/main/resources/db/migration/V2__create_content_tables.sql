@@ -29,6 +29,7 @@ CREATE TABLE public.itcharacter
     player     VARCHAR(255),
     type       SMALLINT
         CONSTRAINT itcharacter_type_check CHECK ((type >= 0) AND (type <= 1)),
+    tendency   VARCHAR(255),
     reward     BIGINT,
     goal       VARCHAR(255),
     itpower_id VARCHAR(255)

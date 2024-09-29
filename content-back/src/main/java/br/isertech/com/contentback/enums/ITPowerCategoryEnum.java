@@ -3,27 +3,27 @@ package br.isertech.com.contentback.enums;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ITPowerCategory {
+public enum ITPowerCategoryEnum {
 
     MENTAL("MENTAL"),
     PHYSICAL("PHYSICAL"),
     ABILITY("ABILITY"),
     ELEMENTAL("ELEMENTAL");
 
-    ITPowerCategory(String label) {
+    ITPowerCategoryEnum(String label) {
         this.label = label;
     }
 
     private final String label;
-    private static final Map<String, ITPowerCategory> BY_LABEL = new HashMap<>();
+    private static final Map<String, ITPowerCategoryEnum> BY_LABEL = new HashMap<>();
 
     static {
-        for (ITPowerCategory p : values()) {
+        for (ITPowerCategoryEnum p : values()) {
             BY_LABEL.put(p.label, p);
         }
     }
 
-    public static ITPowerCategory valueOfLabel(String label) {
+    public static ITPowerCategoryEnum valueOfLabel(String label) {
         return BY_LABEL.get(label);
     }
 }

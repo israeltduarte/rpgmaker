@@ -3,7 +3,7 @@ package br.isertech.com.contentback.enums;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ITWeaponType {
+public enum ITWeaponTypeEnum {
 
     LARGE_SWORD("LARGE_SWORD"),
     LONG_SWORD("LONG_SWORD"),
@@ -20,20 +20,20 @@ public enum ITWeaponType {
     BELL("BELL")
     ;
 
-    ITWeaponType(String label) {
+    ITWeaponTypeEnum(String label) {
         this.label = label;
     }
 
     private final String label;
-    private static final Map<String, ITWeaponType> BY_LABEL = new HashMap<>();
+    private static final Map<String, ITWeaponTypeEnum> BY_LABEL = new HashMap<>();
 
     static {
-        for (ITWeaponType w : values()) {
+        for (ITWeaponTypeEnum w : values()) {
             BY_LABEL.put(w.label, w);
         }
     }
 
-    public static ITWeaponType valueOfLabel(String label) {
+    public static ITWeaponTypeEnum valueOfLabel(String label) {
         return BY_LABEL.get(label);
     }
 }

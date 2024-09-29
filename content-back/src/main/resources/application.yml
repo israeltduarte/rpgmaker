@@ -18,13 +18,13 @@ spring:
     username: postgres
     password: postgres
   flyway:
-    enabled: true
+    enabled: false
     baseline-on-migrate: true
     table: flyway_content_schema_history
   jpa:
     database: POSTGRESQL
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
       jdbc:
         lob.non-contextual-creation: true
     properties:

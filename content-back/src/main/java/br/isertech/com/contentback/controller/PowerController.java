@@ -30,7 +30,7 @@ public class PowerController {
         Page<ITPower> powers = powerService.getAllPowers(pageable);
         if (!powers.isEmpty()) {
             for (ITPower power : powers) {
-                power.add(linkTo(methodOn(CharacterController.class).getCharacterById(power.getId())).withSelfRel());
+                power.add(linkTo(methodOn(PowerController.class).getPowerById(power.getId())).withSelfRel());
             }
         }
 

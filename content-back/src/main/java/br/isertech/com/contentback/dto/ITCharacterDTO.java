@@ -1,6 +1,6 @@
 package br.isertech.com.contentback.dto;
 
-import br.isertech.com.contentback.enums.ITCharacterType;
+import br.isertech.com.contentback.enums.ITCharacterTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,11 +16,12 @@ import java.util.List;
 public class ITCharacterDTO {
 
     private String name;
-    private ITCharacterType type;
-    private String player;
+    private ITCharacterTypeEnum type;
     private Long reward;
     private String goal;
     private String powerId;
+    private Boolean isRival;
+    private String playerName;
     private List<String> notes;
     private LocalDateTime created;
     private LocalDateTime updated;
