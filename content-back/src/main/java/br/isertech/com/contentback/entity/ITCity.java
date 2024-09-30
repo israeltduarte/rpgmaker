@@ -1,5 +1,6 @@
 package br.isertech.com.contentback.entity;
 
+import br.isertech.com.contentback.enums.ITCitySizeEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class ITCity extends RepresentationModel<ITCity> implements Serializable 
     private String name;
     private String title;
     private String leader;
-    private String size;
+    private ITCitySizeEnum size;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "itcity_places", joinColumns = @JoinColumn(name = "itcity_id"))

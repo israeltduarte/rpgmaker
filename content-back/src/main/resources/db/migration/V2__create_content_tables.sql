@@ -1,110 +1,193 @@
-CREATE TABLE public.itpower
+create table public.itcity
 (
-    id        VARCHAR(255) NOT NULL PRIMARY KEY,
-    name      VARCHAR(255),
-    category  SMALLINT
-        CONSTRAINT itpower_category_check CHECK ((category >= 0) AND (category <= 3)),
-    particles VARCHAR(255),
-    updated   TIMESTAMP(6),
-    created   TIMESTAMP(6)
+    id      varchar(255) not null primary key,
+    name    varchar(255),
+    title   varchar(255),
+    leader  varchar(255),
+    size    smallint
+        constraint itcity_size_check check ((size >= 0) AND (size <= 8)),
+    updated timestamp(6),
+    created timestamp(6)
 );
 
-ALTER TABLE public.itpower
-    OWNER TO postgres;
+alter table public.itcity owner to postgres;
 
-CREATE TABLE public.itpower_ideas
+create table public.itcity_curiosities
 (
-    itpower_id VARCHAR(255) NOT NULL
-        CONSTRAINT fkllcimmpqxhikwq5d5ye1th2t6 REFERENCES public.itpower,
-    ideas      VARCHAR(255)
+    itcity_id   varchar(255) not null
+        constraint fkbvkm78toxg1upn6odspo5o12n references public.itcity,
+    curiosities varchar(255)
 );
 
-ALTER TABLE public.itpower_ideas
-    OWNER TO postgres;
+alter table public.itcity_curiosities owner to postgres;
 
-CREATE TABLE public.itcharacter
+create table public.itcity_groups
 (
-    id         VARCHAR(255) NOT NULL PRIMARY KEY,
-    name       VARCHAR(255),
-    player     VARCHAR(255),
-    type       SMALLINT
-        CONSTRAINT itcharacter_type_check CHECK ((type >= 0) AND (type <= 1)),
-    tendency   VARCHAR(255),
-    reward     BIGINT,
-    goal       VARCHAR(255),
-    itpower_id VARCHAR(255)
-        CONSTRAINT fk_power REFERENCES public.itpower (id),
-    updated    TIMESTAMP(6),
-    created    TIMESTAMP(6)
+    itcity_id varchar(255) not null
+        constraint fkh9wh3qybcksjvjnrrdwlydrn3 references public.itcity,
+    groups    varchar(255)
 );
 
-ALTER TABLE public.itcharacter
-    OWNER TO postgres;
+alter table public.itcity_groups owner to postgres;
 
-CREATE TABLE public.itcharacter_notes
+create table public.itcity_notes
 (
-    itcharacter_id VARCHAR(255) NOT NULL
-        CONSTRAINT fkt822hgnw14mul6wn9asuhaplx REFERENCES public.itcharacter,
-    notes          VARCHAR(255)
+    itcity_id varchar(255) not null
+        constraint fk3iswjuqn4352w4xyjqyiencyc references public.itcity,
+    notes     varchar(255)
 );
 
-ALTER TABLE public.itcharacter_notes
-    OWNER TO postgres;
+alter table public.itcity_notes owner to postgres;
 
-CREATE TABLE public.itweapon
+create table public.itcity_people
 (
-    id      VARCHAR(255) NOT NULL PRIMARY KEY,
-    name    VARCHAR(255),
-    owner   VARCHAR(255),
-    power   BIGINT UNIQUE,
-    type    SMALLINT
-        CONSTRAINT itweapon_type_check CHECK ((type >= 0) AND (type <= 12)),
-    updated TIMESTAMP(6),
-    created TIMESTAMP(6)
+    itcity_id varchar(255) not null
+        constraint fkqfgtest3x9aj3hdg8pnticydm references public.itcity,
+    people    varchar(255)
 );
 
-ALTER TABLE public.itweapon
-    OWNER TO postgres;
+alter table public.itcity_people owner to postgres;
 
-CREATE TABLE public.itweapon_notes
+create table public.itcity_places
 (
-    itweapon_id VARCHAR(255) NOT NULL
-        CONSTRAINT fkb2py6palsbhciul7bua9kvrmy REFERENCES public.itweapon,
-    notes       VARCHAR(255)
+    itcity_id varchar(255) not null
+        constraint fk4ckuxjujkl2ecptfse2dwb27v references public.itcity,
+    places    varchar(255)
 );
 
-ALTER TABLE public.itweapon_notes
-    OWNER TO postgres;
+alter table public.itcity_places owner to postgres;
 
-CREATE TABLE public.itweapon_titles
+create table public.itgroup
 (
-    itweapon_id VARCHAR(255) NOT NULL
-        CONSTRAINT fka5h5007hfve5dsloy5u6e3wwh REFERENCES public.itweapon,
-    titles      VARCHAR(255)
+    id          varchar(255) not null primary key,
+    name        varchar(255),
+    description varchar(255),
+    leader      varchar(255),
+    updated     timestamp(6),
+    created     timestamp(6)
 );
 
-ALTER TABLE public.itweapon_titles
-    OWNER TO postgres;
+alter table public.itgroup owner to postgres;
 
-CREATE TABLE public.itgroup
+create table public.itgroup_notes
 (
-    id          VARCHAR(255) NOT NULL PRIMARY KEY,
-    name        VARCHAR(255),
-    leader      VARCHAR(255),
-    description VARCHAR(255),
-    updated     TIMESTAMP(6),
-    created     TIMESTAMP(6)
+    itgroup_id varchar(255) not null
+        constraint fkb4esmkl8nkbn68j2q4jrn7jcu references public.itgroup,
+    notes      varchar(255)
 );
 
-ALTER TABLE public.itgroup
-    OWNER TO postgres;
+alter table public.itgroup_notes owner to postgres;
 
-CREATE TABLE public.itgroup_notes
+create table public.itopponent
 (
-    itgroup_id VARCHAR(255) NOT NULL
-        CONSTRAINT fkb2py6palsbhciul7bua9lsvjei REFERENCES public.itgroup,
-    notes      VARCHAR(255)
+    id      varchar(255) not null primary key,
+    name    varchar(255),
+    power   varchar(255),
+    hp      integer,
+    tac0    integer,
+    ca      integer,
+    updated timestamp(6),
+    created timestamp(6)
 );
 
-ALTER TABLE public.itgroup_notes
-    OWNER TO postgres;
+alter table public.itopponent owner to postgres;
+
+create table public.itopponent_abilities
+(
+    itopponent_id varchar(255) not null
+        constraint fkjjnym0k847octojl7lqxf4k87 references public.itopponent,
+    abilities     varchar(255)
+);
+
+alter table public.itopponent_abilities owner to postgres;
+
+create table public.itopponent_weapons
+(
+    itopponent_id varchar(255) not null
+        constraint fksjmxw2xq7sioks756cm5rs7id references public.itopponent,
+    weapons       varchar(255)
+);
+
+alter table public.itopponent_weapons owner to postgres;
+
+create table public.itpower
+(
+    id        varchar(255) not null primary key,
+    name      varchar(255),
+    category  smallint
+        constraint itpower_category_check check ((category >= 0) AND (category <= 3)),
+    particles varchar(255),
+    updated   timestamp(6),
+    created   timestamp(6)
+);
+
+alter table public.itpower owner to postgres;
+
+create table public.itcharacter
+(
+    id          varchar(255) not null primary key,
+    name        varchar(255),
+    type        smallint
+        constraint itcharacter_type_check check ((type >= 0) AND (type <= 1)),
+    is_rival    boolean,
+    player_name varchar(255),
+    reward      bigint,
+    goal        varchar(255),
+    itpower_id  varchar(255)
+        constraint fkmhdy6d2wyy53y06qi48xenoj1 references public.itpower,
+    tendency    varchar(255),
+    updated     timestamp(6),
+    created     timestamp(6)
+);
+
+alter table public.itcharacter owner to postgres;
+
+create table public.itcharacter_notes
+(
+    itcharacter_id varchar(255) not null
+        constraint fkk1om12tqojepqnkev5y4tc1u1 references public.itcharacter,
+    notes          varchar(255)
+);
+
+alter table public.itcharacter_notes owner to postgres;
+
+create table public.itpower_ideas
+(
+    itpower_id varchar(255) not null
+        constraint fktm5yx6ibm0dfl3na2o2p2nis9 references public.itpower,
+    ideas      varchar(255)
+);
+
+alter table public.itpower_ideas owner to postgres;
+
+create table public.itweapon
+(
+    id      varchar(255) not null primary key,
+    power   bigint unique,
+    name    varchar(255),
+    type    smallint
+        constraint itweapon_type_check check ((type >= 0) AND (type <= 12)),
+    owner   varchar(255),
+    updated timestamp(6),
+    created timestamp(6)
+);
+
+alter table public.itweapon owner to postgres;
+
+create table public.itweapon_notes
+(
+    itweapon_id varchar(255) not null
+        constraint fk1cqqlqp5y0edx7t53pldoh1r1 references public.itweapon,
+    notes       varchar(255)
+);
+
+alter table public.itweapon_notes owner to postgres;
+
+create table public.itweapon_titles
+(
+    itweapon_id varchar(255) not null
+        constraint fkt6dpy40c3l5jsko33wswllm8r references public.itweapon,
+    titles      varchar(255)
+);
+
+alter table public.itweapon_titles owner to postgres;

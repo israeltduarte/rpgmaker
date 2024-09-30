@@ -101,12 +101,14 @@ INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_'
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'aprendizado', 0, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'precognição', 0, now(), now());
 INSERT INTO itpower (id, name, category, updated, created) VALUES ('RM_ITPower_' || gen_random_uuid(), 'retrocognição', 0, now(), now());
+
 INSERT INTO itpower_ideas (itpower_id, ideas) VALUES ((SELECT id FROM itpower WHERE name = 'fogo'), 'torre de fogo');
 INSERT INTO itpower_ideas (itpower_id, ideas) VALUES ((SELECT id FROM itpower WHERE name = 'fogo'), 'soco de fogo');
 
-INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character1', 0, 'vini', 'achieve revenge', null, 10000, now(), now());
-INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character2', 0, 'jow', 'gain power', null, 20000, now(), now());
-INSERT INTO itcharacter (id, name, type, player, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character3', 0, 'luiza', 'make friends', (SELECT id FROM itpower WHERE itpower.name = 'escuridão'), 30000, now(), now());
+INSERT INTO itcharacter (id, name, type, player_name, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character1', 0, 'vini', 'achieve revenge', null, 10000, now(), now());
+INSERT INTO itcharacter (id, name, type, player_name, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character2', 0, 'jow', 'gain power', null, 20000, now(), now());
+INSERT INTO itcharacter (id, name, type, player_name, goal, itpower_id, reward, updated, created) VALUES ('RM_ITCharacter_' || gen_random_uuid(), 'Character3', 0, 'luiza', 'make friends', (SELECT id FROM itpower WHERE itpower.name = 'escuridão'), 30000, now(), now());
+
 INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Note for Character1'), ((SELECT id FROM itcharacter WHERE name = 'Character1'), 'Another note for Character1');
 INSERT INTO itcharacter_notes (itcharacter_id, notes) VALUES ((SELECT id FROM itcharacter WHERE name = 'Character2'), 'Note for Character2');
 
@@ -114,6 +116,7 @@ INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('R
 INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Senado', 'Grupo de quatro Senadores escolhidos por cada região do país para governar', '', now(), now());
 INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Silêncio', 'São caçadores de pessoas com magia, que acreditam que ela deve ser silenciada', '', now(), now());
 INSERT INTO itgroup (id, name, description, leader, updated, created) VALUES ('RM_ITGroup_' || gen_random_uuid(), 'Arcanistas', 'São adoradores de pessoas com magia, que acreditam que o futuro é mágico', '', now(), now());
+
 INSERT INTO itgroup_notes (itgroup_id, notes) VALUES ((SELECT id FROM itgroup WHERE name = 'Gloriosa'), 'são adoradores de uma espada antiga que dizem que partiu os céus, separando os países');
 
 INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Ruptura', 0, 10000, 'DESCONHECIDO', now(), now());
@@ -139,12 +142,8 @@ INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('R
 INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Pandora, o Sino Sacrossanto da Esperança', 12, 9500, 'DESCONHECIDO', now(), now());
 INSERT INTO itweapon (id, name, type, power, owner, updated, created) VALUES ('RM_ITWeapon_' || gen_random_uuid(), 'Portões, o Martelo Sacrossanto da Ordem', 8, 11001, 'DESCONHECIDO', now(), now());
 
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'Arco da Ascenção');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'Arco do Infinito');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'É uma arma que sobe de nível');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Gloriosa'), 'Diz a lenda que ela foi a responsável por partir os céus durante a separação dos países');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Portão'), 'O Martelo da Ordem');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Profunda'), 'A Lâmina das Profundezas');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Profunda'), 'Ela possui uma lâmina de cor azul marinho, de rocha oceânica. Diz a lenda que ela é capaz de cortar oceanos. Quanto mais se prolonga o combate, mais poderosa ela fica.');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Dente de Umbra'), 'Umbra era um dragão antigo conhecido como O Senhor da Escuridão');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Portão'), 'É uma réplica de uma arma sacrossanta anciã');
@@ -154,16 +153,47 @@ INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Procura usuários com magia de luz.');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Bônus contra trevas, remoção de maldições, bônus de defesa e iluminação.');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'Paladinos ganham mais poder ao usá-la.');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'A Espada da Luz');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Barreira, o Escudo Sacrossanto da Proteção Divina'), 'Escudo gerado por Uriel, o Arcanjo dos Portões; Diminui o dano recebido pelo usuário e seus aliados.');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Barreira, o Escudo Sacrossanto da Proteção Divina'), 'O Escudo da Proteção');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Destino, o Arco Sacrossanto da Justiça'), 'Arco gerado por Liriel, a Arcanja da Retidão; Multiplica as flechas, permitindo acertos em área.');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Destino, o Arco Sacrossanto da Justiça'), 'O Arco da Justiça');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Triunfo, a Lança Sacrossanta da Santidade'), 'Lança gerada por Remiel, o Arcanjo da Pureza; Acerto garantido, dano triplicado, sente a pureza no coração dos outros.');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Triunfo, a Lança Sacrossanta da Santidade'), 'A Lança da Santidade');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Puro, o Cajado Sacrossanto da Pureza Divina'), 'Cajado gerado por Galadriel, o Arcanjo da Cura; Concede imortalidade temporária e grande aumento de poder mágico.');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Puro, o Cajado Sacrossanto da Pureza Divina'), 'O Cajado da Pureza');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Pandora, o Sino Sacrossanto da Esperança'), 'Sino gerado por Seleniel, a Arcanja das Canções; Concede bônus em CA, TAC0, vida, dano, cura, resistência e magias para o portador e seus aliados.');
-INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Pandora, o Sino Sacrossanto da Esperança'), 'O Sino da Esperança');
 INSERT INTO itweapon_notes (itweapon_id, notes) VALUES ((SELECT id FROM itweapon WHERE name = 'Portões, o Martelo Sacrossanto da Ordem'), 'Martelo gerado por Rafiel, o Arcanjo Juíz; Causa um dano estrondoso.');
+
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'Arco da Ascenção');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Vix'), 'Arco do Infinito');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Portão'), 'O Martelo da Ordem');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Profunda'), 'A Lâmina das Profundezas');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Luz Sagrada, a Espada Sacrossanta do Arcanjo'), 'A Espada da Luz');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Barreira, o Escudo Sacrossanto da Proteção Divina'), 'O Escudo da Proteção');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Destino, o Arco Sacrossanto da Justiça'), 'O Arco da Justiça');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Triunfo, a Lança Sacrossanta da Santidade'), 'A Lança da Santidade');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Pandora, o Sino Sacrossanto da Esperança'), 'O Sino da Esperança');
+INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Puro, o Cajado Sacrossanto da Pureza Divina'), 'O Cajado da Pureza');
 INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Portões, o Martelo Sacrossanto da Ordem'), 'O Martelo da Ordem');
+
+INSERT INTO itcity (id, name, title, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Fortana', 'A Capital do Turismo', 'Merongatar', 3, now(), now());
+INSERT INTO itcity (id, name, title, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Elbana', 'A Capital Mágica', 'Alto Benito', 5, now(), now());
+INSERT INTO itcity (id, name, title, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Dantana', 'A Capital do Combate', 'Ramirez', 6, now(), now());
+
+INSERT INTO itcity_curiosities (itcity_id, curiosities) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Querem ser a Capital Mágica de Solana');
+
+INSERT INTO itcity_groups (itcity_id, groups) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Seguidores de Tiamat');
+INSERT INTO itcity_groups (itcity_id, groups) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Alcatéia');
+
+INSERT INTO itcity_notes (itcity_id, notes) VALUES ((SELECT id from itcity where name = 'Fortana'), 'é a maior e mais importante cidade de Solana, sendo considerada a grande capital');
+INSERT INTO itcity_notes (itcity_id, notes) VALUES ((SELECT id from itcity where name = 'Fortana'), 'é o centro intelectual de Solana, onde estão os maiores estudiosos de todas as áreas');
+INSERT INTO itcity_notes (itcity_id, notes) VALUES ((SELECT id from itcity where name = 'Fortana'), 'é o maior centro comercial do Reino');
+INSERT INTO itcity_notes (itcity_id, notes) VALUES ((SELECT id from itcity where name = 'Elbana'), 'possui as melhores criaturas mágicas de Solana');
+INSERT INTO itcity_notes (itcity_id, notes) VALUES ((SELECT id from itcity where name = 'Elbana'), 'só pode ser acessada por montarias aladas');
+INSERT INTO itcity_notes (itcity_id, notes) VALUES ((SELECT id from itcity where name = 'Elbana'), 'é o maior fornecedor de minérios mágicos do país');
+
+INSERT INTO itcity_people (itcity_id, people) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Merongatar');
+INSERT INTO itcity_people (itcity_id, people) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Morgana');
+INSERT INTO itcity_people (itcity_id, people) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Lirin');
+INSERT INTO itcity_people (itcity_id, people) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Celma');
+
+INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Taberna Alces Saltitantes');
+INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Taberna Falcões Silvestres');
+INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Taberna Taça Dourada');
+INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Boticário');
