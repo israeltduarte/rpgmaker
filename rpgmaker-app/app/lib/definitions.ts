@@ -78,3 +78,23 @@ export interface ITOpponent {
   weapons: string[];
   abilities: string[];
 };
+
+export interface FormFieldProps {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  required?: boolean;
+  className?: string;
+};
+
+export interface FormTextareaProps {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
+  required?: boolean;
+};
+
