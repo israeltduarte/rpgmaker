@@ -25,34 +25,44 @@ export default function CitiesDashboardPage() {
     fetchCities();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-gray-900"></div>
-      </div>
-    );
-  }
-
   return (
     <>
-      <div className="container mx-auto p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Dashboard de Cidades</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-yellow-500">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Últimas Cidades</h3>
-            <ul className="text-gray-700 dark:text-gray-300">
-              {cities.map((city) => (
-                <li key={city.id}>
-                  <strong>{city.name}:</strong> {city.title}
-                </li>
-              ))}
-            </ul>
+      <div
+        className={`container mx-auto p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md`}
+      >
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[50vh]">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-gray-900"></div>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-green-500">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Estatísticas de Cidades</h3>
-            <p className="text-gray-700 dark:text-gray-300">Total de Cidades: {cities.length}</p>
-          </div>
-        </div>
+        ) : (
+          <>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+              Dashboard de Cidades
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-yellow-500">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  Últimas Cidades
+                </h3>
+                <ul className="text-gray-700 dark:text-gray-300">
+                  {cities.map((city) => (
+                    <li key={city.id}>
+                      <strong>{city.name}:</strong> {city.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-green-500">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  Estatísticas de Cidades
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300">
+                  Total de Cidades: {cities.length}
+                </p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

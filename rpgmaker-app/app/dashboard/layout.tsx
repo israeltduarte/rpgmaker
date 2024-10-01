@@ -1,4 +1,4 @@
-import Navbar from '../ui/Navbar';
+import Navbar from '../ui/navbar/NavBar';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
