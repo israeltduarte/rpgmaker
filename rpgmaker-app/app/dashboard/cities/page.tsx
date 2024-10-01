@@ -1,19 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { ITCity } from "@/app/lib/definitions";
+import { useEffect, useState } from "react";
+import { ITCity } from "../../lib/definitions";
 
-export default function CitiesPage() {
+export default function CitiesDashboardPage() {
   const [cities, setCities] = useState<ITCity[]>([]);
-  const [selectedCity, setSelectedCity] = useState<ITCity | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get("http://localhost:8082/content-back/api/cities");
-        setCities(response.data.content);
+        const citiesResponse = await axios.get(
+          "http://localhost:8082/content-back/api/cities?limit=10&sort=updated,desc"
+        );
+        setCities(citiesResponse.data.content);
       } catch (error) {
         console.error("Erro ao buscar cidades:", error);
       } finally {
@@ -24,77 +25,35 @@ export default function CitiesPage() {
     fetchCities();
   }, []);
 
-  const handleCityChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const cityId = event.target.value;
-    if (cityId) {
-      const city = cities.find((c) => c.id === cityId) || null;
-      setSelectedCity(city);
-    } else {
-      setSelectedCity(null);
-    }
-  };
-
   if (loading) {
-    return <div className="text-center text-lg">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-gray-900"></div>
+      </div>
+    );
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-5xl font-bold text-center mb-8 text-brown-900">Selecione uma Cidade</h1>
-      <div className="mb-6">
-        <select onChange={handleCityChange} className="border border-gray-700 rounded-lg p-2 w-full max-w-xs mx-auto bg-beige-200 shadow-md focus:ring focus:ring-brown-600 transition duration-200 ease-in-out">
-          <option value="">Escolha uma cidade</option>
-          {cities.map((city) => (
-            <option key={city.id} value={city.id}>
-              {city.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {selectedCity && (
-        <div className="bg-beige-100 shadow-lg rounded-lg p-6 border border-gray-700">
-          <h2 className="text-4xl font-semibold text-brown-900 mb-2">{selectedCity.name}</h2>
-          <p className="text-gray-700 mb-4 italic">{selectedCity.title}</p>
-          <p className="text-brown-800"><strong>Líder:</strong> {selectedCity.leader}</p>
-          <p className="text-brown-800"><strong>Tamanho:</strong> {selectedCity.size}</p>
-          
-          <h3 className="text-2xl font-medium text-brown-700 mt-4">Locais:</h3>
-          <ul className="list-disc list-inside pl-4 mb-4">
-            {selectedCity.places.map((place, index) => (
-              <li key={index} className="text-gray-600">{place}</li>
-            ))}
-          </ul>
-          
-          <h3 className="text-2xl font-medium text-brown-700">Pessoas:</h3>
-          <ul className="list-disc list-inside pl-4 mb-4">
-            {selectedCity.people.map((person, index) => (
-              <li key={index} className="text-gray-600">{person}</li>
-            ))}
-          </ul>
-          
-          <h3 className="text-2xl font-medium text-brown-700">Grupos:</h3>
-          <ul className="list-disc list-inside pl-4 mb-4">
-            {selectedCity.groups.map((group, index) => (
-              <li key={index} className="text-gray-600">{group}</li>
-            ))}
-          </ul>
-          
-          <h3 className="text-2xl font-medium text-brown-700">Curiosidades:</h3>
-          <ul className="list-disc list-inside pl-4 mb-4">
-            {selectedCity.curiosities.map((curiosity, index) => (
-              <li key={index} className="text-gray-600">{curiosity}</li>
-            ))}
-          </ul>
-          
-          <h3 className="text-2xl font-medium text-brown-700">Notas:</h3>
-          <ul className="list-disc list-inside pl-4 mb-4">
-            {selectedCity.notes.map((note, index) => (
-              <li key={index} className="text-gray-600">{note}</li>
-            ))}
-          </ul>
+    <>
+      <div className="container mx-auto p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Dashboard de Cidades</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-yellow-500">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Últimas Cidades</h3>
+            <ul className="text-gray-700 dark:text-gray-300">
+              {cities.map((city) => (
+                <li key={city.id}>
+                  <strong>{city.name}:</strong> {city.title}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-green-500">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Estatísticas de Cidades</h3>
+            <p className="text-gray-700 dark:text-gray-300">Total de Cidades: {cities.length}</p>
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
