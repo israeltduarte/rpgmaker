@@ -51,8 +51,6 @@ export default function CityForm() {
       return;
     }
 
-    console.log(name)
-
     try {
       await axios.post("http://localhost:8082/content-back/api/cities", city);
       router.push("/dashboard");
@@ -74,9 +72,9 @@ export default function CityForm() {
                 value={city.name}
                 onChange={handleChange}
                 placeholder="Nome da cidade"
-                // required
-                className={`${errors.name ? "border-red-500" : ""} border-2 rounded-md p-2`}
+                className={errors.name ? "border-red-500" : "border-gray-300"}
               />
+
               <FormField
                 label="Título"
                 name="title"

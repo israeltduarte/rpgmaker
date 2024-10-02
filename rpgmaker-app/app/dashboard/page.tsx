@@ -16,8 +16,8 @@ export default function DashboardPage() {
     const fetchData = async () => {
       try {
         const [citiesResponse, charactersResponse] = await Promise.all([
-          axios.get("http://localhost:8082/content-back/api/cities?limit=5&sort=updated,desc"),
-          axios.get("http://localhost:8082/content-back/api/characters?limit=5&sort=updated,desc"),
+          axios.get("http://localhost:8082/content-back/api/cities?size=5&sort=updated,desc"),
+          axios.get("http://localhost:8082/content-back/api/characters?size=5&sort=updated,desc"),
         ]);
 
         setCities(citiesResponse.data.content);
@@ -121,11 +121,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <form action={signOut} className="mt-8">
-          <button className="flex font-medium text-red-600 dark:text-red-500 hover:underline">
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
+        
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut } from '@/app/lib/actions';
 import Link from 'next/link';
 import { useState } from 'react';
 import NavItem from './NavItem';
@@ -27,7 +28,6 @@ export default function Navbar() {
         </button>
 
         <div className={`lg:flex lg:space-x-4 items-center absolute lg:relative lg:top-0 lg:left-0`}>
-          {/* Item de Cidades com submenu */}
           <div
             className={`relative group h-16 flex items-center hover:bg-indigo-700`}
             onMouseEnter={() => setIsCitiesMenuOpen(true)}
@@ -46,12 +46,17 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Outros itens */}
           <NavItem href="/dashboard/characters">Personagens</NavItem>
           <NavItem href="/dashboard/powers">Poderes</NavItem>
           <NavItem href="/dashboard/groups">Grupos</NavItem>
           <NavItem href="/dashboard/opponents">Oponentes</NavItem>
         </div>
+
+        <form action={signOut} className="mt-8">
+          <button className="flex font-medium text-red-600 dark:text-red-500 hover:underline">
+            <div className="hidden md:block">Sign Out</div>
+          </button>
+        </form>
       </div>
     </nav>
   );

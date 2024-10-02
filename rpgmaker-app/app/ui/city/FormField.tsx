@@ -14,7 +14,7 @@ export default function FormField({ label, name, value, onChange, placeholder = 
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className={`border border-gray-300 dark:border-gray-600 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 ${className}`}
+        className={`border-2 ${className} rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500`}
       />
     </>
   );
