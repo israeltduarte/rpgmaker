@@ -191,3 +191,14 @@ create table public.itweapon_titles
 );
 
 alter table public.itweapon_titles owner to postgres;
+
+create table public.ittask
+(
+    id      varchar(255) not null primary key,
+    name    varchar(255),
+    description    varchar(255),
+    updated timestamp(6),
+    created timestamp(6)
+);
+
+alter table public.ittask owner to postgres;

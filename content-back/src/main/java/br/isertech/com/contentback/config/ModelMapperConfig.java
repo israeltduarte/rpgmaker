@@ -27,6 +27,7 @@ public class ModelMapperConfig {
         convertFromITGroupDTOToITGroup(mapper);
         convertFromITCityDTOToITCity(mapper);
         convertFromITOpponentDTOToITOpponent(mapper);
+        convertFromITTaskDTOToITTask(mapper);
 
         return mapper;
     }
@@ -105,6 +106,15 @@ public class ModelMapperConfig {
             mapping.map(ITOpponentDTO::getWeapons, ITOpponent::setWeapons);
             mapping.map(ITOpponentDTO::getUpdated, ITOpponent::setUpdated);
             mapping.map(ITOpponentDTO::getCreated, ITOpponent::setCreated);
+        });
+    }
+
+    private void convertFromITTaskDTOToITTask(ModelMapper mapper) {
+        mapper.createTypeMap(ITTaskDTO.class, ITTask.class).addMappings(mapping -> {
+            mapping.map(ITTaskDTO::getName, ITTask::setName);
+            mapping.map(ITTaskDTO::getDescription, ITTask::setDescription);
+            mapping.map(ITTaskDTO::getUpdated, ITTask::setUpdated);
+            mapping.map(ITTaskDTO::getCreated, ITTask::setCreated);
         });
     }
 }

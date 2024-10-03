@@ -5,7 +5,7 @@ import { useState } from "react";
 import FormField from "./FormField";
 import FormTextarea from "./FormTextArea";
 
-export default function CityForm() {
+export default function AddCityForm() {
   const [city, setCity] = useState<ITCity>({
     id: "",
     name: "",
@@ -52,7 +52,14 @@ export default function CityForm() {
     }
 
     try {
-      await axios.post("http://localhost:8082/content-back/api/cities", city);
+      await axios.post("http://localhost:8080/content-back/api/cities", city, 
+        {
+        headers: {
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE"
+        }
+      });
       router.push("/dashboard");
     } catch (error) {
       console.error("Erro ao adicionar cidade:", error);
@@ -60,7 +67,7 @@ export default function CityForm() {
   };
 
   return (
-    <div className="container mx-auto bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md p-8 text-gray-800">
+    <div className="container mx-auto bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md text-gray-800">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Informações Básicas</h2>
@@ -149,15 +156,13 @@ export default function CityForm() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-          <FormTextarea
-            label="Notas"
-            name="notes"
-            value={city.notes.join(", ")}
-            onChange={(e) => handleArrayChange(e, "notes")}
-            placeholder="Observações adicionais"
-          />
-        </div>
+        <FormTextarea
+          label="Notas"
+          name="notes"
+          value={city.notes.join(", ")}
+          onChange={(e) => handleArrayChange(e, "notes")}
+          placeholder="Observações adicionais"
+        />
 
         <div className="flex justify-end">
           <button

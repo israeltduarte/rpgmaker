@@ -18,16 +18,7 @@ export default function Navbar() {
           </Link>
         </h1>
 
-        <button
-          className="text-white block lg:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-
-        <div className={`lg:flex lg:space-x-4 items-center absolute lg:relative lg:top-0 lg:left-0`}>
+        <div className={`lg:flex lg:space-x-4 items-center justify-center flex-grow hidden lg:flex`}>
           <div
             className={`relative group h-16 flex items-center hover:bg-indigo-700`}
             onMouseEnter={() => setIsCitiesMenuOpen(true)}
@@ -36,12 +27,8 @@ export default function Navbar() {
             <NavItem href="/dashboard/cities">Cidades</NavItem>
             {isCitiesMenuOpen && (
               <div className="absolute left-0 top-full bg-indigo-400 text-white rounded shadow-lg w-48 z-50">
-                <NavItem href="/dashboard/cities/add-city" isSubMenu>
-                  Adicionar Cidade
-                </NavItem>
-                <NavItem href="/dashboard/cities/view-cities" isSubMenu>
-                  Ver Cidades
-                </NavItem>
+                <NavItem href="/dashboard/cities/view-cities" isSubMenu>Ver Cidades</NavItem>
+                <NavItem href="/dashboard/cities/add-city" isSubMenu>Adicionar Cidade</NavItem>
               </div>
             )}
           </div>
@@ -52,9 +39,9 @@ export default function Navbar() {
           <NavItem href="/dashboard/opponents">Oponentes</NavItem>
         </div>
 
-        <form action={signOut} className="mt-8">
-          <button className="flex font-medium text-red-600 dark:text-red-500 hover:underline">
-            <div className="hidden md:block">Sign Out</div>
+        <form action={signOut} className="ml-auto">
+          <button className="text-white font-medium hover:underline">
+            Sign Out
           </button>
         </form>
       </div>

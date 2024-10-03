@@ -197,3 +197,8 @@ INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity whe
 INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Taberna Falcões Silvestres');
 INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Taberna Taça Dourada');
 INSERT INTO itcity_places (itcity_id, places) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Boticário');
+
+INSERT INTO ittask (id, name, description, updated, created) VALUES ('RM_ITTask_' || gen_random_uuid(), 'Regar as plantas', 'Tem que encher o pote', now(), now());
+INSERT INTO ittask (id, name, description, updated, created) VALUES ('RM_ITTask_' || gen_random_uuid(), 'Arrumar a cama', 'Tem até as 12h para completar essa', now(), now());
+INSERT INTO ittask (id, name, description, updated, created) VALUES ('RM_ITTask_' || gen_random_uuid(), 'Preparar próxima sessão', 'Criar os adversários da próxima sessão', now(), now());
+INSERT INTO ittask (id, name, description, updated, created) VALUES ('RM_ITTask_' || gen_random_uuid(), 'Poder da Escuridão', 'Criar lista de ideias para o poder da escuridão de mago', now(), now());

@@ -11,10 +11,30 @@ spring:
           uri: lb://RPGMAKER-BACK
           predicates:
             - Path=/rpgmaker-back/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedHeaders: '*'
+              allowedMethods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+              maxAge: 30
         - id: content-back
           uri: lb://CONTENT-BACK
           predicates:
             - Path=/content-back/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedHeaders: '*'
+              allowedMethods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+              maxAge: 30
 
 rm:
   serviceRegistry:

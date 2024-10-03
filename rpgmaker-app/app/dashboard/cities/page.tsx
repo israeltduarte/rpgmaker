@@ -12,7 +12,7 @@ export default function CitiesDashboardPage() {
     const fetchCities = async () => {
       try {
         const citiesResponse = await axios.get(
-          "http://localhost:8082/content-back/api/cities?limit=10&sort=updated,desc"
+          "http://localhost:8080/content-back/api/cities?size=10&sort=updated,desc"
         );
         setCities(citiesResponse.data.content);
       } catch (error) {
@@ -24,6 +24,8 @@ export default function CitiesDashboardPage() {
 
     fetchCities();
   }, []);
+
+  
 
   return (
     <>

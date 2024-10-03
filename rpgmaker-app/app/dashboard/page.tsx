@@ -16,8 +16,8 @@ export default function DashboardPage() {
     const fetchData = async () => {
       try {
         const [citiesResponse, charactersResponse] = await Promise.all([
-          axios.get("http://localhost:8082/content-back/api/cities?size=5&sort=updated,desc"),
-          axios.get("http://localhost:8082/content-back/api/characters?size=5&sort=updated,desc"),
+          axios.get("http://localhost:8080/content-back/api/cities?size=5&sort=updated,desc"),
+          axios.get("http://localhost:8080/content-back/api/characters?size=5&sort=updated,desc"),
         ]);
 
         setCities(citiesResponse.data.content);
@@ -88,7 +88,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-red-500">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">To-Do List</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Lista de Tarefas</h3>
             <form onSubmit={handleAddTodo} className="mb-4">
               <input
                 type="text"
@@ -121,7 +121,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        
+
       </div>
     </>
   );

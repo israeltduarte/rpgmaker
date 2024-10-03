@@ -21,5 +21,8 @@ public class Messages {
     public static final String OPPONENT_NOT_FOUND_INFO = "Opponent not found";
     public static final String OPPONENTS_DELETED = "All Opponents deleted";
     public static final String OPPONENT_DELETED = "Opponent deleted";
+    public static final String TASK_NOT_FOUND_INFO = "Task not found";
+    public static final String TASKS_DELETED = "All Tasks deleted";
+    public static final String TASK_DELETED = "Task deleted";
 
 }

@@ -12,7 +12,7 @@ export type State = {
 };
 
 export async function fetchCities(): Promise<ITCity[]> {
-  const res = await fetch("http://localhost:8082/content-back/api/cities", {
+  const res = await fetch("http://localhost:8080/content-back/api/cities", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

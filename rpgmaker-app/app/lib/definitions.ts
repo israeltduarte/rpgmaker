@@ -64,12 +64,12 @@ export interface ITCity {
   title: string;
   leader: string;
   size: string;
+  curiosities: string[];
   places: string[];
   people: string[];
   groups: string[];
-  curiosities: string[];
   notes: string[];
-};
+}
 
 export interface ITOpponent {
   id: string;
@@ -97,4 +97,10 @@ export interface FormTextareaProps {
   placeholder?: string;
   required?: boolean;
 };
+
+export interface CityCardProps {
+  city: ITCity;
+  isSelected: boolean;
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void; // Correção aqui!
+}
 

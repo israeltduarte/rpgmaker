@@ -1,7 +1,6 @@
 package br.isertech.com.contentback.controller;
 
 import br.isertech.com.contentback.dto.ITPowerDTO;
-import br.isertech.com.contentback.entity.ITCharacter;
 import br.isertech.com.contentback.entity.ITPower;
 import br.isertech.com.contentback.service.PowerService;
 import lombok.RequiredArgsConstructor;
@@ -11,12 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/powers")
 @RequiredArgsConstructor
