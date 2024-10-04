@@ -34,7 +34,11 @@ public class ITCity extends RepresentationModel<ITCity> implements Serializable 
     )
     private String id;
     private String name;
-    private String title;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "itcity_titles", joinColumns = @JoinColumn(name = "itcity_id"))
+    private List<String> titles;
+
     private String leader;
     private ITCitySizeEnum size;
 

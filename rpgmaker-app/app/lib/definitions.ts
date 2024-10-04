@@ -61,7 +61,7 @@ export interface ITGroup {
 export interface ITCity {
   id: string;
   name: string;
-  title: string;
+  titles: string[];
   leader: string;
   size: string;
   curiosities: string[];

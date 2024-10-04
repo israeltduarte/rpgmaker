@@ -172,9 +172,14 @@ INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweap
 INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Puro, o Cajado Sacrossanto da Pureza Divina'), 'O Cajado da Pureza');
 INSERT INTO itweapon_titles (itweapon_id, titles) VALUES ((SELECT id FROM itweapon WHERE name = 'Portões, o Martelo Sacrossanto da Ordem'), 'O Martelo da Ordem');
 
-INSERT INTO itcity (id, name, title, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Fortana', 'A Capital do Turismo', 'Merongatar', 3, now(), now());
-INSERT INTO itcity (id, name, title, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Elbana', 'A Capital Mágica', 'Alto Benito', 5, now(), now());
-INSERT INTO itcity (id, name, title, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Dantana', 'A Capital do Combate', 'Ramirez', 6, now(), now());
+INSERT INTO itcity (id, name, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Fortana', 'Merongatar', 3, now(), now());
+INSERT INTO itcity (id, name, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Elbana', 'Alto Benito', 5, now(), now());
+INSERT INTO itcity (id, name, leader, size, updated, created) VALUES ('RM_ITCity_' || gen_random_uuid(), 'Dantana', 'Ramirez', 6, now(), now());
+
+INSERT INTO itcity_titles (itcity_id, titles) VALUES ((SELECT id from itcity where name = 'Fortana'), 'A Capital do Turismo');
+INSERT INTO itcity_titles (itcity_id, titles) VALUES ((SELECT id from itcity where name = 'Fortana'), 'A Capital dos Festivais');
+INSERT INTO itcity_titles (itcity_id, titles) VALUES ((SELECT id from itcity where name = 'Elbana'), 'A Capital Mágica');
+INSERT INTO itcity_titles (itcity_id, titles) VALUES ((SELECT id from itcity where name = 'Dantana'), 'A Capital do Combate');
 
 INSERT INTO itcity_curiosities (itcity_id, curiosities) VALUES ((SELECT id from itcity where name = 'Fortana'), 'Querem ser a Capital Mágica de Solana');
 

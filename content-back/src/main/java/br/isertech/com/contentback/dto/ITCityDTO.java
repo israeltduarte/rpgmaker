@@ -15,9 +15,9 @@ import java.util.List;
 public class ITCityDTO {
 
     private String name;
-    private String title;
     private String leader;
     private String size;
+    private List<String> titles;
     private List<String> places;
     private List<String> people;
     private List<String> groups;

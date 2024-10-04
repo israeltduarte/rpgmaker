@@ -6,17 +6,17 @@ import FormField from "./FormField";
 import FormTextarea from "./FormTextArea";
 
 export default function AddCityForm() {
-  const [city, setCity] = useState<ITCity>({
+  const [cityTemp, setCityTemp] = useState({
     id: "",
     name: "",
     title: "",
     leader: "",
     size: "",
-    places: [],
-    people: [],
-    groups: [],
-    curiosities: [],
-    notes: [],
+    places: "",
+    people: "",
+    groups: "",
+    curiosities: "",
+    notes: "",
   });
 
   const citySizeOptions = {
@@ -36,30 +36,31 @@ export default function AddCityForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setCity((prevCity) => ({ ...prevCity, [name]: value }));
-  };
-
-  const handleArrayChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: string) => {
-    const values = e.target.value.split(",").map((item) => item.trim());
-    setCity((prevCity) => ({ ...prevCity, [field]: values }));
+    setCityTemp((prevCity) => ({ ...prevCity, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (city.name.trim() === "") {
+    if (cityTemp.name.trim() === "") {
       setErrors({ ...errors, name: true });
       return;
     }
 
+    const city: ITCity = {
+      id: "",
+      name: cityTemp.name,
+      title: cityTemp.title,
+      leader: cityTemp.leader,
+      size: cityTemp.size,
+      places: cityTemp.places.split(",").map((item) => item.trim()).filter(Boolean),
+      people: cityTemp.people.split(",").map((item) => item.trim()).filter(Boolean),
+      groups: cityTemp.groups.split(",").map((item) => item.trim()).filter(Boolean),
+      curiosities: cityTemp.curiosities.split(",").map((item) => item.trim()).filter(Boolean),
+      notes: cityTemp.notes.split(",").map((item) => item.trim()).filter(Boolean),
+    };
+
     try {
-      await axios.post("http://localhost:8080/content-back/api/cities", city, 
-        {
-        headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE"
-        }
-      });
+      await axios.post("http://localhost:8080/content-back/api/cities", city);
       router.push("/dashboard");
     } catch (error) {
       console.error("Erro ao adicionar cidade:", error);
@@ -76,7 +77,7 @@ export default function AddCityForm() {
               <FormField
                 label="Nome"
                 name="name"
-                value={city.name}
+                value={cityTemp.name}
                 onChange={handleChange}
                 placeholder="Nome da cidade"
                 className={errors.name ? "border-red-500" : "border-gray-300"}
@@ -85,7 +86,7 @@ export default function AddCityForm() {
               <FormField
                 label="Título"
                 name="title"
-                value={city.title}
+                value={cityTemp.title}
                 onChange={handleChange}
                 placeholder="Ex: Capital Mágica do Reino, A Veneza Cesariana"
               />
@@ -94,7 +95,7 @@ export default function AddCityForm() {
               <FormField
                 label="Líder"
                 name="leader"
-                value={city.leader}
+                value={cityTemp.leader}
                 onChange={handleChange}
                 placeholder="Nome do líder"
               />
@@ -102,7 +103,7 @@ export default function AddCityForm() {
                 <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Tamanho</label>
                 <select
                   name="size"
-                  value={city.size}
+                  value={cityTemp.size}
                   onChange={handleChange}
                   className="border border-gray-300 dark:border-gray-600 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
@@ -125,15 +126,15 @@ export default function AddCityForm() {
               <FormField
                 label="Locais"
                 name="places"
-                value={city.places.join(", ")}
-                onChange={(e) => handleArrayChange(e, "places")}
+                value={cityTemp.places}
+                onChange={handleChange}
                 placeholder="Ex: Taberna do Sol, Campo das Chuvas"
               />
               <FormField
                 label="Pessoas"
                 name="people"
-                value={city.people.join(", ")}
-                onChange={(e) => handleArrayChange(e, "people")}
+                value={cityTemp.people}
+                onChange={handleChange}
                 placeholder="Ex: João, Maria"
               />
             </div>
@@ -141,15 +142,15 @@ export default function AddCityForm() {
               <FormField
                 label="Grupos"
                 name="groups"
-                value={city.groups.join(", ")}
-                onChange={(e) => handleArrayChange(e, "groups")}
+                value={cityTemp.groups}
+                onChange={handleChange}
                 placeholder="Ex: Guardiões do Amanhã, Soleiros de Viana"
               />
               <FormField
                 label="Curiosidades"
                 name="curiosities"
-                value={city.curiosities.join(", ")}
-                onChange={(e) => handleArrayChange(e, "curiosities")}
+                value={cityTemp.curiosities}
+                onChange={handleChange}
                 placeholder="Ex: As pessoas gostam de cozinhar carne de coelho"
               />
             </div>
@@ -159,8 +160,8 @@ export default function AddCityForm() {
         <FormTextarea
           label="Notas"
           name="notes"
-          value={city.notes.join(", ")}
-          onChange={(e) => handleArrayChange(e, "notes")}
+          value={cityTemp.notes}
+          onChange={handleChange}
           placeholder="Observações adicionais"
         />
 
@@ -174,8 +175,5 @@ export default function AddCityForm() {
         </div>
       </form>
     </div>
-
   );
 }
-
-

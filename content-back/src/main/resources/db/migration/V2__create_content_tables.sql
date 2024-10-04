@@ -2,7 +2,6 @@ create table public.itcity
 (
     id      varchar(255) not null primary key,
     name    varchar(255),
-    title   varchar(255),
     leader  varchar(255),
     size    smallint
         constraint itcity_size_check check ((size >= 0) AND (size <= 8)),
@@ -11,6 +10,15 @@ create table public.itcity
 );
 
 alter table public.itcity owner to postgres;
+
+create table public.itcity_titles
+(
+    itcity_id varchar(255) not null
+        constraint fkh9wh3qybcksjvjnrrdwlydrn3 references public.itcity,
+    titles    varchar(255)
+);
+
+alter table public.itcity_titles owner to postgres;
 
 create table public.itcity_curiosities
 (

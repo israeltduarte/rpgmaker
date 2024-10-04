@@ -3,46 +3,77 @@
 import { ITCity } from "@/app/lib/definitions";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormField from "./FormField";
+import FormTextarea from "./FormTextArea";
 
 interface UpdateCityFormProps {
   city: ITCity;
-  onSubmit: (city: ITCity) => void;
 }
 
 export default function UpdateCityForm({ city }: UpdateCityFormProps) {
+  console.log("UPDATE CITY FORM: " + city);
   const [errors, setErrors] = useState({ name: false });
   const router = useRouter();
-  const [formData, setFormData] = useState<ITCity>({
+  const [cityTemp, setCityTemp] = useState({
     id: "",
     name: "",
-    title: "",
+    titles: "",
     leader: "",
     size: "",
-    places: [],
-    people: [],
-    groups: [],
-    curiosities: [],
-    notes: [],
+    places: "",
+    people: "",
+    groups: "",
+    curiosities: "",
+    notes: "",
   });
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  useEffect(() => {
+    if (city) {
+      setCityTemp({
+        id: city.id,
+        name: city.name,
+        leader: city.leader,
+        size: city.size,
+        titles: city.titles.join(", "),
+        places: city.places.join(", "),
+        people: city.people.join(", "),
+        groups: city.groups.join(", "),
+        curiosities: city.curiosities.join(", "),
+        notes: city.notes.join(", "),
+      });
+    }
+  }, [city]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setCityTemp({ ...cityTemp, [name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (city.name.trim() === "") {
+    if (cityTemp.name.trim() === "") {
       setErrors({ ...errors, name: true });
       return;
     }
 
+    const updatedCity = {
+      ...cityTemp,
+      titles: cityTemp.titles.split(", ").filter(Boolean),
+      places: cityTemp.places.split(", ").filter(Boolean),
+      people: cityTemp.people.split(", ").filter(Boolean),
+      groups: cityTemp.groups.split(", ").filter(Boolean),
+      curiosities: cityTemp.curiosities.split(", ").filter(Boolean),
+      notes: cityTemp.notes.split(", ").filter(Boolean),
+    };
+
+    console.log(updatedCity);
+
     try {
-      await axios.post("http://localhost:8080/content-back/api/cities", city);
+      await axios.put(`http://localhost:8080/content-back/api/cities/${updatedCity.id}`, updatedCity);
       router.push("/dashboard");
     } catch (error) {
-      console.error("Erro ao adicionar cidade:", error);
+      console.error("Erro ao atualizar cidade:", error);
     }
   };
 
@@ -56,16 +87,15 @@ export default function UpdateCityForm({ city }: UpdateCityFormProps) {
               <FormField
                 label="Nome"
                 name="name"
-                value={formData.name}
+                value={cityTemp.name}
                 onChange={handleChange}
                 placeholder="Nome da cidade"
                 required
               />
-
               <FormField
                 label="Título"
                 name="title"
-                value={formData.title}
+                value={cityTemp.titles}
                 onChange={handleChange}
                 placeholder="Título da cidade"
                 required
@@ -75,7 +105,7 @@ export default function UpdateCityForm({ city }: UpdateCityFormProps) {
               <FormField
                 label="Líder"
                 name="leader"
-                value={formData.leader}
+                value={cityTemp.leader}
                 onChange={handleChange}
                 placeholder="Líder da cidade"
                 required
@@ -83,7 +113,7 @@ export default function UpdateCityForm({ city }: UpdateCityFormProps) {
               <FormField
                 label="Tamanho"
                 name="size"
-                value={formData.size}
+                value={cityTemp.size}
                 onChange={handleChange}
                 placeholder="Tamanho da cidade"
                 required
@@ -99,36 +129,44 @@ export default function UpdateCityForm({ city }: UpdateCityFormProps) {
               <FormField
                 label="Locais"
                 name="places"
-                value={formData.places.join(", ")} // Junte os locais para mostrar em um input
-                onChange={(e) => setFormData({ ...formData, places: e.target.value.split(", ") })}
+                value={cityTemp.places}
+                onChange={handleChange}
                 placeholder="Separar locais por vírgula"
               />
               <FormField
                 label="Pessoas"
                 name="people"
-                value={formData.people.join(", ")} // Junte as pessoas para mostrar em um input
-                onChange={(e) => setFormData({ ...formData, people: e.target.value.split(", ") })}
+                value={cityTemp.people}
+                onChange={handleChange}
                 placeholder="Separar pessoas por vírgula"
               />
             </div>
             <div className="w-1/2">
               <FormField
-                label="Locais"
-                name="places"
-                value={formData.places.join(", ")} // Junte os locais para mostrar em um input
-                onChange={(e) => setFormData({ ...formData, places: e.target.value.split(", ") })}
-                placeholder="Separar locais por vírgula"
+                label="Grupos"
+                name="groups"
+                value={cityTemp.groups}
+                onChange={handleChange}
+                placeholder="Separar grupos por vírgula"
               />
               <FormField
-                label="Pessoas"
-                name="people"
-                value={formData.people.join(", ")} // Junte as pessoas para mostrar em um input
-                onChange={(e) => setFormData({ ...formData, people: e.target.value.split(", ") })}
-                placeholder="Separar pessoas por vírgula"
+                label="Curiosidades"
+                name="curiosities"
+                value={cityTemp.curiosities}
+                onChange={handleChange}
+                placeholder="Separar curiosidades por vírgula"
               />
             </div>
           </div>
         </div>
+
+        <FormTextarea
+          label="Notas"
+          name="notes"
+          value={cityTemp.notes}
+          onChange={handleChange}
+          placeholder="Observações adicionais"
+        />
 
         <div className="flex justify-end">
           <button
@@ -140,6 +178,5 @@ export default function UpdateCityForm({ city }: UpdateCityFormProps) {
         </div>
       </form>
     </div>
-
   );
 }

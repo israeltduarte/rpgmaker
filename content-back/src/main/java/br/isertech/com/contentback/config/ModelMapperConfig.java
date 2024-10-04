@@ -82,7 +82,6 @@ public class ModelMapperConfig {
     private void convertFromITCityDTOToITCity(ModelMapper mapper) {
         mapper.createTypeMap(ITCityDTO.class, ITCity.class).addMappings(mapping -> {
             mapping.map(ITCityDTO::getName, ITCity::setName);
-            mapping.map(ITCityDTO::getTitle, ITCity::setTitle);
             mapping.map(ITCityDTO::getLeader, ITCity::setLeader);
             mapping.map(ITCityDTO::getSize, ITCity::setSize);
             mapping.map(ITCityDTO::getCuriosities, ITCity::setCuriosities);
