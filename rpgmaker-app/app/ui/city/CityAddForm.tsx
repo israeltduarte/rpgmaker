@@ -2,8 +2,8 @@ import { ITCity } from "@/app/lib/definitions";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FormField from "./FormField";
-import FormTextarea from "./FormTextArea";
+import FormField from "./CityFormField";
+import FormTextarea from "./CityFormTextArea";
 
 export default function CityAddForm() {
   const [cityTemp, setCityTemp] = useState({

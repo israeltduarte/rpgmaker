@@ -1,6 +1,6 @@
 import { FormFieldProps } from "@/app/lib/definitions";
 
-export default function FormField({ label, name, value, onChange, placeholder = "", required = false, className }: FormFieldProps) {
+const CityFormField: React.FC<FormFieldProps> = ({ label, name, value, onChange, placeholder = "", required = false, className }) => {
   return (
     <>
       <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -19,3 +19,5 @@ export default function FormField({ label, name, value, onChange, placeholder = 
     </>
   );
 }
+
+export default CityFormField;

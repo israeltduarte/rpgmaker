@@ -1,8 +1,8 @@
 import { ITCity } from "@/app/lib/definitions";
 import { AnimatePresence, motion } from "framer-motion";
 import CityDetailsButtons from "./CityDetailsButtons";
-import FormField from "./FormField";
-import FormTextarea from "./FormTextArea";
+import FormField from "./CityFormField";
+import FormTextarea from "./CityFormTextArea";
 
 interface CityDetailsProps {
   selectedCity: ITCity | null;

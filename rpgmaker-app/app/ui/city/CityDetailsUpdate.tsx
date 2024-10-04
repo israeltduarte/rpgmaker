@@ -1,8 +1,8 @@
 import { ITCity } from "@/app/lib/definitions";
 import { AnimatePresence, motion } from "framer-motion";
 import CityDetailsButtons from "./CityDetailsButtons";
-import FormField from "./FormField"; // Importe os campos de formulário necessários
-import FormTextarea from "./FormTextArea";
+import FormField from "./CityFormField"; // Importe os campos de formulário necessários
+import FormTextarea from "./CityFormTextArea";
 
 
 interface CityDetailsUpdateProps {
@@ -81,35 +81,35 @@ const CityDetailsUpdate: React.FC<CityDetailsUpdateProps> = ({
             <FormTextarea
               label="Curiosidades"
               name="curiosities"
-              value={selectedCity.curiosities.join(", ")}
+              value={selectedCity.curiosities.join(",")}
               onChange={(e) => handleFieldChange("curiosities", e.target.value)}
             />
 
             <FormTextarea
               label="Locais"
               name="places"
-              value={selectedCity.places.join(", ")}
+              value={selectedCity.places.join(",")}
               onChange={(e) => handleFieldChange("places", e.target.value)}
             />
 
             <FormTextarea
               label="Pessoas"
               name="people"
-              value={selectedCity.people.join(", ")}
+              value={selectedCity.people.join(",")}
               onChange={(e) => handleFieldChange("people", e.target.value)}
             />
 
             <FormTextarea
               label="Grupos"
               name="groups"
-              value={selectedCity.groups.join(", ")}
+              value={selectedCity.groups.join(",")}
               onChange={(e) => handleFieldChange("groups", e.target.value)}
             />
 
             <FormTextarea
               label="Notas"
               name="notes"
-              value={selectedCity.notes.join(", ")}
+              value={selectedCity.notes.join(",")}
               onChange={(e) => handleFieldChange("notes", e.target.value)}
             />
           </div>
