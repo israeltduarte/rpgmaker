@@ -7,7 +7,6 @@ import NavItem from './NavItem';
 
 export default function Navbar() {
   const [isCitiesMenuOpen, setIsCitiesMenuOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <nav className="bg-indigo-600">
@@ -40,7 +39,7 @@ export default function Navbar() {
         </div>
 
         <form action={signOut} className="ml-auto">
-          <button className="text-white font-medium hover:underline">
+          <button className="font-medium rounded p-2 text-white bg-red-400 hover:bg-red-600 active:bg-red-900">
             Sign Out
           </button>
         </form>
