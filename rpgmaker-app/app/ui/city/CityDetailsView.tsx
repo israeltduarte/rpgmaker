@@ -15,7 +15,7 @@ interface CityDetailsProps {
   handleUndo: () => void;
 }
 
-const CityDetails: React.FC<CityDetailsProps> = ({
+const CityDetailsView: React.FC<CityDetailsProps> = ({
   selectedCity,
   isEditing,
   handleClose,
@@ -156,4 +156,4 @@ const CityDetails: React.FC<CityDetailsProps> = ({
   );
 };
 
-export default CityDetails;
+export default CityDetailsView;

@@ -64,7 +64,7 @@ export default function DashboardPage() {
             <ul className="text-gray-700 dark:text-gray-300">
               {cities.map((city) => (
                 <li key={city.id}>
-                  <strong>{city.name}:</strong> {city.title}
+                  <strong>{city.name}:</strong> {city.titles}
                 </li>
               ))}
             </ul>

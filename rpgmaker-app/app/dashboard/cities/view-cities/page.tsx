@@ -1,7 +1,7 @@
 "use client";
 
 import { ITCity } from "@/app/lib/definitions";
-import CityDetails from "@/app/ui/city/CityDetails";
+import CityDetailsContainer from "@/app/ui/city/CityDetailsContainer";
 import CityList from "@/app/ui/city/CityList";
 import CitySelector from "@/app/ui/city/CitySelector";
 import axios from "axios";
@@ -156,7 +156,7 @@ export default function ViewCitiesPage() {
             onSearch={handleSearch}
           />
 
-          <CityDetails
+          <CityDetailsContainer
             selectedCity={selectedCity}
             isEditing={isEditing}
             handleClose={handleCloseDetails}

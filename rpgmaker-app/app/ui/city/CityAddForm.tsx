@@ -5,11 +5,11 @@ import { useState } from "react";
 import FormField from "./FormField";
 import FormTextarea from "./FormTextArea";
 
-export default function AddCityForm() {
+export default function CityAddForm() {
   const [cityTemp, setCityTemp] = useState({
     id: "",
     name: "",
-    title: "",
+    titles: "",
     leader: "",
     size: "",
     places: "",
@@ -49,7 +49,7 @@ export default function AddCityForm() {
     const city: ITCity = {
       id: "",
       name: cityTemp.name,
-      title: cityTemp.title,
+      titles: cityTemp.titles.split(",").map((item) => item.trim()).filter(Boolean),
       leader: cityTemp.leader,
       size: cityTemp.size,
       places: cityTemp.places.split(",").map((item) => item.trim()).filter(Boolean),
@@ -85,8 +85,8 @@ export default function AddCityForm() {
 
               <FormField
                 label="Título"
-                name="title"
-                value={cityTemp.title}
+                name="titles"
+                value={cityTemp.titles}
                 onChange={handleChange}
                 placeholder="Ex: Capital Mágica do Reino, A Veneza Cesariana"
               />
