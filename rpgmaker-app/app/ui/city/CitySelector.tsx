@@ -1,23 +1,18 @@
-import { ITCity } from "@/app/lib/definitions";
+import { useCityContext } from "@/app/context/CityContext";
 import React from "react";
 
-interface CitySelectorProps {
-  cities: ITCity[];
-  onCityChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  searchTerm: string;
-  onSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+const CitySelector: React.FC = () => {
+  const {
+    cities,
+    searchTerm,
+    handleSearchCities,
+    handleCityChange,
+  } = useCityContext();
 
-const CitySelector: React.FC<CitySelectorProps> = ({
-  cities,
-  onCityChange,
-  searchTerm,
-  onSearch,
-}) => {
   return (
     <div className="mb-6 flex items-center gap-4 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
       <select
-        onChange={onCityChange}
+        onChange={handleCityChange}
         className="text-gray-600 border border-gray-300 rounded-lg p-3 w-full max-w-xs bg-gray-100 shadow-md focus:ring focus:ring-indigo-500 transition duration-200 ease-in-out"
       >
         <option value="">Escolha uma cidade</option>
@@ -32,7 +27,7 @@ const CitySelector: React.FC<CitySelectorProps> = ({
         type="text"
         placeholder="Pesquisar cidades..."
         value={searchTerm}
-        onChange={onSearch}
+        onChange={handleSearchCities}
         className="text-gray-900 border border-gray-300 rounded-lg p-3 w-full bg-gray-100 shadow-md focus:ring focus:ring-indigo-500 transition duration-200 ease-in-out"
       />
     </div>

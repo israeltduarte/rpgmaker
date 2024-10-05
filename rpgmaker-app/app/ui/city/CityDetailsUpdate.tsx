@@ -1,31 +1,15 @@
-import { ITCity } from "@/app/lib/definitions";
+import { useCityContext } from "@/app/context/CityContext";
 import { AnimatePresence, motion } from "framer-motion";
 import CityDetailsButtons from "./CityDetailsButtons";
-import FormField from "./CityFormField"; // Importe os campos de formulário necessários
+import FormField from "./CityFormField";
 import FormTextarea from "./CityFormTextArea";
 
+const CityDetailsUpdate = () => {
+  const {
+    selectedCity,
+    handleFieldChange
+  } = useCityContext();
 
-interface CityDetailsUpdateProps {
-  selectedCity: ITCity | null;
-  isEditing: boolean;
-  handleFieldChange: (field: keyof ITCity, value: any) => void;
-  handleEdit: () => void;
-  handleUpdate: () => void;
-  handleClose: () => void;
-  handleDeleteConfirmation: (response: boolean) => void;
-  handleUndo: () => void;
-}
-
-const CityDetailsUpdate: React.FC<CityDetailsUpdateProps> = ({
-  selectedCity,
-  isEditing,
-  handleFieldChange,
-  handleEdit,
-  handleUpdate,
-  handleDeleteConfirmation,
-  handleClose,
-  handleUndo,
-}) => {
   if (!selectedCity) return null;
 
   return (
@@ -38,14 +22,7 @@ const CityDetailsUpdate: React.FC<CityDetailsUpdateProps> = ({
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.3 }}
         >
-          <CityDetailsButtons
-            isEditing={isEditing}
-            handleEdit={handleEdit}
-            handleClose={handleClose}
-            handleUpdate={handleUpdate}
-            handleDeleteConfirmation={handleDeleteConfirmation}
-            handleUndo={handleUndo}
-          />
+          <CityDetailsButtons />
 
           <div className="text-gray-800">
             <h2 className="text-3xl font-semibold mb-2">
@@ -115,7 +92,7 @@ const CityDetailsUpdate: React.FC<CityDetailsUpdateProps> = ({
           </div>
         </motion.div>
       </AnimatePresence>
-    </div >
+    </div>
   );
 };
 

@@ -1,28 +1,20 @@
+import { useCityContext } from "@/app/context/CityContext";
 import { FaCheck, FaUndo } from "react-icons/fa";
 import { IoClose, IoPencil } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 
-interface CityDetailsButtonsProps {
-  isEditing: boolean;
-  handleClose: () => void;
-  handleEdit: () => void;
-  handleUpdate: () => void;
-  handleUndo: () => void;
-  handleDeleteConfirmation: (response: boolean) => void;
-}
-
-const CityDetailsButtons: React.FC<CityDetailsButtonsProps> = ({
-  isEditing,
-  handleEdit,
-  handleClose,
-  handleUpdate,
-  handleUndo,
-  handleDeleteConfirmation
-}) => {
-
+const CityDetailsButtons = () => {
+  const {
+    isEditingCity,
+    handleEdit,
+    handleCloseCityDetails,
+    handleUpdate,
+    handleUndoCityUpdate,
+    handleDeleteConfirmation
+  } = useCityContext();
   return (
     <div className="absolute top-2 right-2 flex gap-2">
-      {!isEditing ? (
+      {!isEditingCity ? (
         <>
           <button
             className="text-gray-600 bg-blue-200 hover:bg-blue-400 rounded-full p-2 transition-colors duration-200"
@@ -38,7 +30,7 @@ const CityDetailsButtons: React.FC<CityDetailsButtonsProps> = ({
           </button>
           <button
             className="text-gray-600 bg-white hover:bg-white rounded-full p-2 transition-colors duration-200"
-            onClick={handleClose}
+            onClick={handleCloseCityDetails}
           >
             <IoClose size={20} />
           </button>
@@ -47,7 +39,7 @@ const CityDetailsButtons: React.FC<CityDetailsButtonsProps> = ({
         <>
           <button
             className="text-gray-600 bg-yellow-100 hover:bg-yellow-200 rounded-full p-2 transition-colors duration-200"
-            onClick={handleUndo}
+            onClick={handleUndoCityUpdate}
           >
             <FaUndo size={20} />
           </button>

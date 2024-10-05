@@ -1,11 +1,15 @@
 import { ITCity } from "@/app/lib/definitions";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormField from "./CityFormField";
 import FormTextarea from "./CityFormTextArea";
+import { useCityContext } from "@/app/context/CityContext";
 
 export default function CityAddForm() {
+  const {
+    handleAddCity
+  } = useCityContext();
+
   const [cityTemp, setCityTemp] = useState({
     id: "",
     name: "",
@@ -60,7 +64,7 @@ export default function CityAddForm() {
     };
 
     try {
-      await axios.post("http://localhost:8080/content-back/api/cities", city);
+      handleAddCity(city); // Usando a função do contexto para adicionar a cidade
       router.push("/dashboard");
     } catch (error) {
       console.error("Erro ao adicionar cidade:", error);
