@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IoAdd } from "react-icons/io5";
+import { IoAdd, IoTrash } from "react-icons/io5";
 import { useCityContext } from "../context/CityContext";
 import { useUtilsContext } from "../context/UtilsContext";
 import { ITCharacter, ITTodo } from "../lib/definitions";
@@ -140,7 +140,7 @@ const DashboardPage = () => {
                     onClick={() => deleteTodo(todo.id)}
                     className="text-red-600 hover:text-red-800"
                   >
-                    Remover
+                    <IoTrash />
                   </button>
                 </li>
               ))}

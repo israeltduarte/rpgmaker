@@ -30,7 +30,7 @@ interface CityContextProps {
   handleUndoCityUpdate: () => void;
   handleCardClick: (city: ITCity) => void;
   handleCityChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  
+
 }
 
 const CityContext = createContext<CityContextProps | undefined>(undefined);
@@ -79,7 +79,7 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
         field === 'groups' ||
         field === 'notes'
       ) {
-        updatedCity[field] = value.split(',');
+        updatedCity[field] = value.split(',').map((item: string) => item.trim());
       } else {
         updatedCity[field] = value;
       }
@@ -87,6 +87,7 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return updatedCity;
     });
   };
+
 
   const handleAddCity = async (city: ITCity) => {
     if (city) {

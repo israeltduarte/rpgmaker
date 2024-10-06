@@ -34,7 +34,6 @@ export const UtilsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const addTodo = async (todo: ITTodo) => {
-    console.log(todo)
     try {
       const response = await axios.post("http://localhost:8080/content-back/api/tasks", todo);
       setTodos([...todos, response.data]);
