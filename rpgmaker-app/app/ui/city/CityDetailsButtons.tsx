@@ -10,7 +10,7 @@ const CityDetailsButtons = () => {
     handleCloseCityDetails,
     handleUpdate,
     handleUndoCityUpdate,
-    handleDeleteConfirmation
+    handleDeleteCity
   } = useCityContext();
   return (
     <div className="absolute top-2 right-2 flex gap-2">
@@ -24,7 +24,7 @@ const CityDetailsButtons = () => {
           </button>
           <button
             className="text-gray-600 bg-red-200 hover:bg-red-400 rounded-full p-2 transition-colors duration-200"
-            onClick={() => handleDeleteConfirmation(true)}
+            onClick={() => handleDeleteCity()}
           >
             <MdDelete size={20} />
           </button>

@@ -8,22 +8,23 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 interface CityContextProps {
   cities: ITCity[];
   originalCity: ITCity | null;
-  setOriginalCity: (city: ITCity | null) => void;
   selectedCity: ITCity | null;
-  setSelectedCity: (city: ITCity | null) => void;
   loading: boolean;
-  setLoading: (loading: boolean) => void;
   isEditingCity: boolean;
   searchTerm: string;
-  setSearchTerm: (searchTerm: string) => void;
   debouncedSearchTerm: string;
-  setDebouncedSearchTerm: (debouncedSearchTerm: string) => void;
-  handleSearchCities: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  setOriginalCity: (originalCity: ITCity | null) => void;
+  setSelectedCity: (selectedCity: ITCity | null) => void;
+  setLoading: (loading: boolean) => void;
   setIsEditingCity: (editing: boolean) => void;
+  setSearchTerm: (searchTerm: string) => void;
+  setDebouncedSearchTerm: (debouncedSearchTerm: string) => void;
+
+  handleSearchCities: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleFieldChange: (field: keyof ITCity, value: any) => void;
   handleCloseCityDetails: () => void;
   handleUpdate: () => Promise<void>;
-  handleDeleteConfirmation: (response: boolean) => Promise<void>;
+  handleDeleteCity: () => Promise<void>;
   handleEdit: () => void;
   handleUndoCityUpdate: () => void;
   handleCardClick: (city: ITCity) => void;
@@ -89,13 +90,15 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const handleAddCity = async (city: ITCity) => {
     if (city) {
       try {
-        await axios.post("http://localhost:8080/content-back/api/cities", city);
+        const response = await axios.post("http://localhost:8080/content-back/api/cities", city);
+        setCities((prevCities) => [...prevCities, response.data]);
         router.push("/dashboard");
       } catch (error) {
         console.error("Erro ao adicionar cidade:", error);
       }
     }
   };
+
 
   const handleUpdate = async () => {
     if (selectedCity) {
@@ -113,11 +116,13 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const handleDeleteConfirmation = async (response: boolean) => {
+  const handleDeleteCity = async () => {
     if (selectedCity) {
       try {
         await axios.delete(`http://localhost:8080/content-back/api/cities/${selectedCity.id}`);
-        setCities((prevCities) => prevCities.filter((city) => city.id !== selectedCity.id));
+        setCities((prevCities) =>
+          prevCities.filter((city) => city.id !== selectedCity.id)
+        );
         setSelectedCity(null);
       } catch (error) {
         console.error('Erro ao deletar a cidade:', error);
@@ -177,7 +182,7 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
         handleFieldChange,
         handleCloseCityDetails,
         handleUpdate,
-        handleDeleteConfirmation,
+        handleDeleteCity,
         handleEdit,
         handleUndoCityUpdate,
         handleCardClick,

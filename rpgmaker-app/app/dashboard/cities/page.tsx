@@ -1,29 +1,16 @@
 "use client";
 
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { ITCity } from "../../lib/definitions";
+import { useCityContext } from "@/app/context/CityContext";
 
-export default function CitiesDashboardPage() {
-  const [cities, setCities] = useState<ITCity[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const citiesResponse = await axios.get(
-          "http://localhost:8080/content-back/api/cities?size=10&sort=updated,desc"
-        );
-        setCities(citiesResponse.data.content);
-      } catch (error) {
-        console.error("Erro ao buscar cidades:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+const CitiesDashboardPage = () => {
 
-    fetchCities();
-  }, []);
+  const {
+    cities,
+    loading
+  } = useCityContext();
+
+  const sortedCities = cities.sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime());
 
   return (
     <div className="container mx-auto p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md">
@@ -37,13 +24,12 @@ export default function CitiesDashboardPage() {
             Dashboard de Cidades
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Últimas Cidades */}
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 transform hover:shadow-xl">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Últimas Cidades
               </h3>
               <ul className="text-gray-700 dark:text-gray-300">
-                {cities.map((city) => (
+                {sortedCities.map((city) => (
                   <li key={city.id} className="border-b border-gray-200 dark:border-gray-600 pb-2 mb-2">
                     <strong>{city.name}:</strong> {city.titles}
                   </li>
@@ -51,13 +37,12 @@ export default function CitiesDashboardPage() {
               </ul>
             </div>
 
-            {/* Estatísticas de Cidades */}
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 transform hover:shadow-xl">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Estatísticas de Cidades
               </h3>
               <p className="text-gray-700 dark:text-gray-300">
-                Total de Cidades: {cities.length}
+                Total de Cidades: {sortedCities.length}
               </p>
             </div>
           </div>
@@ -66,3 +51,5 @@ export default function CitiesDashboardPage() {
     </div>
   );
 }
+
+export default CitiesDashboardPage;

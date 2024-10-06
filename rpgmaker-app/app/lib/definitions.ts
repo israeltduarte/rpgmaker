@@ -61,14 +61,15 @@ export interface ITGroup {
 export interface ITCity {
   id: string;
   name: string;
-  titles: string[];
   leader: string;
   size: string;
+  titles: string[];
   curiosities: string[];
   places: string[];
   people: string[];
   groups: string[];
   notes: string[];
+  updated: string;
 }
 
 export interface ITOpponent {
@@ -104,3 +105,8 @@ export interface CityCardProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void; // Correção aqui!
 }
 
+export interface ITodo {
+  id: string;
+  name: string;
+  description: string;
+}

@@ -4,7 +4,7 @@ import CityDetailsButtons from "./CityDetailsButtons";
 
 const CityDetailsView = () => {
   const {
-    isEditing,
+    isEditingCity,
     selectedCity
   } = useCityContext();
 
@@ -22,7 +22,7 @@ const CityDetailsView = () => {
         >
           <CityDetailsButtons />
 
-          <div className={`${isEditing ? "text-gray-800" : "text-gray-200"}`}>
+          <div className={`${isEditingCity ? "text-gray-800" : "text-gray-200"}`}>
             <h2 className="text-3xl font-semibold mb-2">{selectedCity.name}</h2>
             <div className="text-gray-200">
               <p><strong>Líder:</strong> {selectedCity.leader}</p>

@@ -4,14 +4,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoAdd } from "react-icons/io5";
 import { useCityContext } from "../context/CityContext";
+import { useUtilsContext } from "../context/UtilsContext";
 import { ITCharacter } from "../lib/definitions";
 
-export default function DashboardPage() {
-  const { cities, loading } = useCityContext(); // Utilize o contexto para obter as cidades
+const DashboardPage = () => {
   const [characters, setCharacters] = useState<ITCharacter[]>([]);
-  const [todos, setTodos] = useState<string[]>([]);
   const [newTodo, setNewTodo] = useState("");
-  const [isInputVisible, setIsInputVisible] = useState(false); // Estado para controlar a visibilidade do input
+  const [isInputVisible, setIsInputVisible] = useState(false);
+
+  const {
+    cities,
+    loading
+  } = useCityContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,23 +30,18 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
-  const handleAddTodo = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newTodo.trim()) {
-      setTodos([...todos, newTodo]);
-      setNewTodo("");
-      setIsInputVisible(false); // Esconde o input após adicionar a tarefa
-    }
-  };
+  const {
+    todos,
+    deleteTodo
+  } = useUtilsContext();
 
-  const handleRemoveTodo = (index: number) => {
-    const updatedTodos = todos.filter((_, i) => i !== index);
-    setTodos(updatedTodos);
-  };
+  const sortedCities = cities.sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime());
 
-  const toggleInputVisibility = () => {
-    setIsInputVisible(!isInputVisible); // Alterna a visibilidade do input
-  };
+  const toggleInputVisibility = () => { setIsInputVisible(!isInputVisible); };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  }
 
   if (loading) {
     return (
@@ -60,7 +59,7 @@ export default function DashboardPage() {
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 transform hover:shadow-xl">
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Últimas Cidades</h3>
           <ul className="text-gray-700 dark:text-gray-300 flex flex-col space-y-2">
-            {cities.map((city) => (
+            {sortedCities.map((city) => (
               <li key={city.id} className="border-b border-gray-200 dark:border-gray-600 pb-2">
                 <strong>{city.name}:</strong> {city.titles}
               </li>
@@ -81,7 +80,7 @@ export default function DashboardPage() {
 
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition duration-300 transform hover:shadow-xl">
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Estatísticas do Sistema</h3>
-          <p className="text-gray-700 dark:text-gray-300">Total de Cidades: {cities.length}</p>
+          <p className="text-gray-700 dark:text-gray-300">Total de Cidades: {sortedCities.length}</p>
           <p className="text-gray-700 dark:text-gray-300">Total de Personagens: {characters.length}</p>
         </div>
 
@@ -90,7 +89,7 @@ export default function DashboardPage() {
 
           <div className="absolute top-4 right-4">
             <button
-              onClick={() => setIsInputVisible(!isInputVisible)}
+              onClick={toggleInputVisibility}
               className="text-gray-600 bg-blue-200 hover:bg-blue-400 rounded-full p-2 transition-colors duration-200"
             >
               <IoAdd size={20} />
@@ -98,11 +97,10 @@ export default function DashboardPage() {
           </div>
 
           {isInputVisible && (
-            <form onSubmit={handleAddTodo} className="mb-4">
+            <form onSubmit={handleSubmit} className="mb-4">
               <input
                 type="text"
                 value={newTodo}
-                onChange={(e) => setNewTodo(e.target.value)}
                 placeholder="Nova tarefa"
                 className="w-full p-2 mb-2 border rounded text-gray-800"
               />
@@ -123,9 +121,9 @@ export default function DashboardPage() {
             <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
               {todos.map((todo, index) => (
                 <li key={index} className="flex justify-between items-center mb-2">
-                  {todo}
+                  {todo.name}
                   <button
-                    onClick={() => handleRemoveTodo(index)}
+                    onClick={() => deleteTodo(todo.id)}
                     className="text-red-600 hover:text-red-800"
                   >
                     Remover
@@ -135,8 +133,9 @@ export default function DashboardPage() {
             </ul>
           )}
         </div>
-
       </div>
     </div>
   );
 }
+
+export default DashboardPage;

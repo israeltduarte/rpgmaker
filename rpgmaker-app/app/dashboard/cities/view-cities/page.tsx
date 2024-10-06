@@ -1,19 +1,19 @@
 "use client";
 
-import { useCityContext } from "@/app/context/CityContext"; // ajuste o caminho conforme necessário
+import { useCityContext } from "@/app/context/CityContext";
 import CityDetailsContainer from "@/app/ui/city/CityDetailsContainer";
 import CityList from "@/app/ui/city/CityList";
 import CitySelector from "@/app/ui/city/CitySelector";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 export default function ViewCitiesPage() {
   const {
+    cities,
+    loading,
     searchTerm,
     debouncedSearchTerm,
     setDebouncedSearchTerm,
-    cities,
-    loading
   } = useCityContext();
 
   useEffect(() => {
@@ -26,9 +26,7 @@ export default function ViewCitiesPage() {
     };
   }, [searchTerm]);
 
-  const filteredCities = cities.filter((city) =>
-    city.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-  );
+  const filteredCities = cities.filter((city) => city.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()));
 
   return (
     <div className="container mx-auto">

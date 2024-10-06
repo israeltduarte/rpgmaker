@@ -5,7 +5,9 @@ import CityDetailsView from "./CityDetailsView";
 const CityDetailsContainer = () => {
   const { isEditingCity } = useCityContext();
 
-  return isEditingCity ? <CityDetailsUpdate /> : <CityDetailsView />;
+  return (
+    isEditingCity ? <CityDetailsUpdate /> : <CityDetailsView />
+  );
 };
 
 export default CityDetailsContainer;
