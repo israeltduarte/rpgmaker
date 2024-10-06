@@ -1,9 +1,9 @@
+import { useCityContext } from "@/app/context/CityContext";
 import { ITCity } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormField from "./CityFormField";
 import FormTextarea from "./CityFormTextArea";
-import { useCityContext } from "@/app/context/CityContext";
 
 export default function CityAddForm() {
   const {
@@ -21,6 +21,7 @@ export default function CityAddForm() {
     groups: "",
     curiosities: "",
     notes: "",
+    updated: "",
   });
 
   const citySizeOptions = {
@@ -56,6 +57,7 @@ export default function CityAddForm() {
       titles: cityTemp.titles.split(",").map((item) => item.trim()).filter(Boolean),
       leader: cityTemp.leader,
       size: cityTemp.size,
+      updated: cityTemp.updated,
       places: cityTemp.places.split(",").map((item) => item.trim()).filter(Boolean),
       people: cityTemp.people.split(",").map((item) => item.trim()).filter(Boolean),
       groups: cityTemp.groups.split(",").map((item) => item.trim()).filter(Boolean),
