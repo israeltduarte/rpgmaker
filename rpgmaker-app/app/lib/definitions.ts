@@ -105,8 +105,7 @@ export interface CityCardProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void; // Correção aqui!
 }
 
-export interface ITodo {
+export interface ITTodo {
   id: string;
   name: string;
-  description: string;
 }

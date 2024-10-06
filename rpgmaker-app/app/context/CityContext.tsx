@@ -20,16 +20,17 @@ interface CityContextProps {
   setSearchTerm: (searchTerm: string) => void;
   setDebouncedSearchTerm: (debouncedSearchTerm: string) => void;
 
+  handleAddCity: (city: ITCity) => void;
+  handleUpdate: () => Promise<void>;
+  handleDeleteCity: () => Promise<void>;
   handleSearchCities: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleFieldChange: (field: keyof ITCity, value: any) => void;
   handleCloseCityDetails: () => void;
-  handleUpdate: () => Promise<void>;
-  handleDeleteCity: () => Promise<void>;
   handleEdit: () => void;
   handleUndoCityUpdate: () => void;
   handleCardClick: (city: ITCity) => void;
   handleCityChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleAddCity: (city: ITCity) => void;
+  
 }
 
 const CityContext = createContext<CityContextProps | undefined>(undefined);

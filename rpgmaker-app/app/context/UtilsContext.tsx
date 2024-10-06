@@ -2,21 +2,20 @@
 
 import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ITodo } from '../lib/definitions';
+import { ITTodo } from '../lib/definitions';
 
 interface UtilsContextType {
-  todos: ITodo[];
+  todos: ITTodo[];
   loading: boolean;
   setLoading: (loading: boolean) => void;
-  addTodo: (todo: ITodo) => Promise<void>;
+  addTodo: (todo: ITTodo) => Promise<void>;
   deleteTodo: (id: string) => void;
 }
 
 const UtilsContext = createContext<UtilsContextType | undefined>(undefined);
 
 export const UtilsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
-  const [newTodo, setNewTodo] = useState<ITodo | null>(null);
+  const [todos, setTodos] = useState<ITTodo[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export const UtilsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     fetchTodos();
   }, []);
 
-  const addTodo = async (todo: ITodo) => {
+  const addTodo = async (todo: ITTodo) => {
     console.log(todo)
     try {
       const response = await axios.post("http://localhost:8080/content-back/api/tasks", todo);

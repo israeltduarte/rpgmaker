@@ -204,7 +204,6 @@ create table public.ittask
 (
     id      varchar(255) not null primary key,
     name    varchar(255),
-    description    varchar(255),
     updated timestamp(6),
     created timestamp(6)
 );

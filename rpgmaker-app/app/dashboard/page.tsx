@@ -5,17 +5,23 @@ import { useEffect, useState } from "react";
 import { IoAdd } from "react-icons/io5";
 import { useCityContext } from "../context/CityContext";
 import { useUtilsContext } from "../context/UtilsContext";
-import { ITCharacter } from "../lib/definitions";
+import { ITCharacter, ITTodo } from "../lib/definitions";
 
 const DashboardPage = () => {
   const [characters, setCharacters] = useState<ITCharacter[]>([]);
-  const [newTodo, setNewTodo] = useState("");
+  const [newTodo, setNewTodo] = useState<string>("");
   const [isInputVisible, setIsInputVisible] = useState(false);
 
   const {
     cities,
     loading
   } = useCityContext();
+
+  const {
+    todos,
+    deleteTodo,
+    addTodo
+  } = useUtilsContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,18 +36,25 @@ const DashboardPage = () => {
     fetchData();
   }, []);
 
-  const {
-    todos,
-    deleteTodo
-  } = useUtilsContext();
-
   const sortedCities = cities.sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime());
 
   const toggleInputVisibility = () => { setIsInputVisible(!isInputVisible); };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTodo(e.target.value);
+  };
 
-  }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newTodo) {
+      const todo: ITTodo = {
+        id: "",
+        name: newTodo
+      };
+      addTodo(todo);
+      setNewTodo("");
+    }
+  };
 
   if (loading) {
     return (
@@ -101,6 +114,7 @@ const DashboardPage = () => {
               <input
                 type="text"
                 value={newTodo}
+                onChange={handleInputChange}
                 placeholder="Nova tarefa"
                 className="w-full p-2 mb-2 border rounded text-gray-800"
               />

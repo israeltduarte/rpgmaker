@@ -111,7 +111,6 @@ public class ModelMapperConfig {
     private void convertFromITTaskDTOToITTask(ModelMapper mapper) {
         mapper.createTypeMap(ITTaskDTO.class, ITTask.class).addMappings(mapping -> {
             mapping.map(ITTaskDTO::getName, ITTask::setName);
-            mapping.map(ITTaskDTO::getDescription, ITTask::setDescription);
             mapping.map(ITTaskDTO::getUpdated, ITTask::setUpdated);
             mapping.map(ITTaskDTO::getCreated, ITTask::setCreated);
         });

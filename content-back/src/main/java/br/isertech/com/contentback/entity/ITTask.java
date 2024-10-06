@@ -32,7 +32,6 @@ public class ITTask extends RepresentationModel<ITPower> implements Serializable
     )
     private String id;
     private String name;
-    private String description;
     private LocalDateTime created;
     private LocalDateTime updated;
 }
