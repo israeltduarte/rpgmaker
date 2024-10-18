@@ -1,11 +1,13 @@
 import { useCityContext } from "@/app/context/CityContext";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
 import CityDetailsButtons from "./CityDetailsButtons";
 
 const CityDetailsView = () => {
   const {
     isEditingCity,
-    selectedCity
+    selectedCity,
   } = useCityContext();
 
   if (!selectedCity) return null;

@@ -3,6 +3,7 @@
 import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ITTodo } from '../lib/definitions';
+import { usePathname } from 'next/navigation';
 
 interface UtilsContextType {
   todos: ITTodo[];

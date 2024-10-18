@@ -1,5 +1,6 @@
 import { useCityContext } from "@/app/context/CityContext";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 import CityDetailsButtons from "./CityDetailsButtons";
 import FormField from "./CityFormField";
 import FormTextarea from "./CityFormTextArea";
@@ -7,10 +8,22 @@ import FormTextarea from "./CityFormTextArea";
 const CityDetailsUpdate = () => {
   const {
     selectedCity,
-    handleFieldChange
+    handleFieldChange,
+    setSelectedCity,
+    isEditingCity,
   } = useCityContext();
 
-  if (!selectedCity) return null;
+  if (!selectedCity) {
+    return null;
+  }
+
+  useEffect(() => {
+    return () => {
+      if (!isEditingCity) {
+        setSelectedCity(null);
+      }
+    };
+  }, [setSelectedCity, isEditingCity]);
 
   return (
     <div className="mb-6">

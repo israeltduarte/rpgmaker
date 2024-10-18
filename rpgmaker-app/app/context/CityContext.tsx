@@ -26,11 +26,11 @@ interface CityContextProps {
   handleSearchCities: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleFieldChange: (field: keyof ITCity, value: any) => void;
   handleCloseCityDetails: () => void;
-  handleEdit: () => void;
+  handleEditCity: () => void;
   handleUndoCityUpdate: () => void;
   handleCardClick: (city: ITCity) => void;
   handleCityChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-
+  resetSelectedCity: () => void;
 }
 
 const CityContext = createContext<CityContextProps | undefined>(undefined);
@@ -132,7 +132,7 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const handleEdit = () => {
+  const handleEditCity = () => {
     if (selectedCity) {
       setOriginalCity({ ...selectedCity });
       setIsEditingCity(true);
@@ -164,6 +164,10 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const resetSelectedCity = () => {
+    setSelectedCity(null);
+  };
+
   return (
     <CityContext.Provider
       value={{
@@ -185,11 +189,12 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
         handleCloseCityDetails,
         handleUpdate,
         handleDeleteCity,
-        handleEdit,
+        handleEditCity,
         handleUndoCityUpdate,
         handleCardClick,
         handleCityChange,
         handleAddCity,
+        resetSelectedCity
       }}
     >
       {children}

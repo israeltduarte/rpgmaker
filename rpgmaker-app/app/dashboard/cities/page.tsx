@@ -2,7 +2,6 @@
 
 import { useCityContext } from "@/app/context/CityContext";
 
-
 const CitiesDashboardPage = () => {
 
   const {

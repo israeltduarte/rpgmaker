@@ -6,25 +6,26 @@ import { MdDelete } from "react-icons/md";
 const CityDetailsButtons = () => {
   const {
     isEditingCity,
-    handleEdit,
+    handleEditCity,
     handleCloseCityDetails,
     handleUpdate,
     handleUndoCityUpdate,
     handleDeleteCity
   } = useCityContext();
+
   return (
     <div className="absolute top-2 right-2 flex gap-2">
       {!isEditingCity ? (
         <>
           <button
             className="text-gray-600 bg-blue-200 hover:bg-blue-400 rounded-full p-2 transition-colors duration-200"
-            onClick={handleEdit}
+            onClick={handleEditCity}
           >
             <IoPencil size={20} />
           </button>
           <button
             className="text-gray-600 bg-red-200 hover:bg-red-400 rounded-full p-2 transition-colors duration-200"
-            onClick={() => handleDeleteCity()}
+            onClick={handleDeleteCity}
           >
             <MdDelete size={20} />
           </button>
