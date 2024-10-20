@@ -1,6 +1,5 @@
 import { useCityContext } from "@/app/context/CityContext";
 import { ITCity } from "@/app/lib/definitions";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormField from "../utils/FormField";
 import FormTextarea from "../utils/FormTextArea";
@@ -37,7 +36,6 @@ const CityAddForm = () => {
   };
 
   const [errors, setErrors] = useState({ name: false });
-  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -66,8 +64,7 @@ const CityAddForm = () => {
     };
 
     try {
-      handleAddCity(city); // Usando a função do contexto para adicionar a cidade
-      router.push("/dashboard");
+      handleAddCity(city);
     } catch (error) {
       console.error("Erro ao adicionar cidade:", error);
     }

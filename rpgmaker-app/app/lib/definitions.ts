@@ -8,13 +8,13 @@ export interface User {
 export interface ITCharacter {
   id: string;
   name: string;
-  type: ITCharacterTypeEnum;
+  type: ITCharacterTypeEnum | undefined;
   tendency: string;
   reward: string;
   goal: string;
   isRival: boolean;
   playerName: string;
-  power?: ITPower;
+  power?: ITPower | undefined;
   notes: string[];
   updated: string;
 }
@@ -85,19 +85,19 @@ export interface FormFieldProps {
   label: string;
   name: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   required?: boolean;
   className?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export interface FormTextareaProps {
   label: string;
   name: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
   required?: boolean;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export interface CityCardProps {

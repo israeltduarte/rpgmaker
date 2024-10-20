@@ -1,6 +1,5 @@
 import { useCharacterContext } from "@/app/context/CharacterContext";
 import { ITCharacter, ITCharacterTypeEnum } from "@/app/lib/definitions";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormField from "../utils/FormField";
 import FormTextarea from "../utils/FormTextArea";
@@ -10,19 +9,18 @@ const CharacterAddForm = () => {
     handleAddCharacter
   } = useCharacterContext();
 
-  const router = useRouter();
-
-  const [characterTemp, setCharacterTemp] = useState<ITCharacter>({
+  const [characterTemp, setCharacterTemp] = useState({
     id: "",
     name: "",
-    type: ITCharacterTypeEnum.PDM,
+    type: undefined,
     tendency: "",
     reward: "",
     goal: "",
     isRival: false,
     playerName: "",
     power: undefined,
-    notes: [],
+    notes: "",
+    updated: ""
   });
 
   const [errors, setErrors] = useState({ name: false });
@@ -43,9 +41,22 @@ const CharacterAddForm = () => {
       return;
     }
 
+    const character: ITCharacter = {
+      id: "",
+      name: characterTemp.name,
+      type: characterTemp.type,
+      tendency: characterTemp.tendency,
+      reward: characterTemp.reward,
+      goal: characterTemp.goal,
+      isRival: characterTemp.isRival,
+      playerName: characterTemp.playerName,
+      power: characterTemp.power,
+      notes: characterTemp.notes.split(",").map((item) => item.trim()).filter(Boolean),
+      updated: characterTemp.updated,
+    };
+
     try {
-      handleAddCharacter(characterTemp);
-      router.push("/characters/dashboard");
+      handleAddCharacter(character);
     } catch (error) {
       console.error("Erro ao adicionar personagem:", error);
     }
@@ -74,6 +85,7 @@ const CharacterAddForm = () => {
                   onChange={handleChange}
                   className="border border-gray-300 dark:border-gray-600 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
+                  <option value="">Selecione o tipo</option>
                   {Object.values(ITCharacterTypeEnum).map((type) => (
                     <option key={type} value={type}>
                       {type}
@@ -136,7 +148,7 @@ const CharacterAddForm = () => {
         <FormTextarea
           label="Notas"
           name="notes"
-          value={characterTemp.notes.join(", ")}
+          value={characterTemp.notes}
           onChange={handleChange}
           placeholder="Notas adicionais (separar por vírgula)"
         />

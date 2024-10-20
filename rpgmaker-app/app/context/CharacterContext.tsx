@@ -87,7 +87,7 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       try {
         const response = await axios.post("http://localhost:8080/content-back/api/characters", character);
         setCharacters((prevCharacters) => [...prevCharacters, response.data]);
-        router.push("/dashboard");
+        router.push("/dashboard/characters");
       } catch (error) {
         console.error("Erro ao adicionar personagem:", error);
       }
