@@ -4,14 +4,16 @@ import React from "react";
 const CitySelector: React.FC = () => {
   const {
     cities,
+    selectedCity,
     searchTerm,
-    handleSearchCities,
     handleCityChange,
+    handleSearchCities,
   } = useCityContext();
 
   return (
     <div className="mb-6 flex items-center gap-4 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
       <select
+        value={selectedCity?.id || ""}
         onChange={handleCityChange}
         className="text-gray-600 border border-gray-300 rounded-lg p-3 w-full max-w-xs bg-gray-100 shadow-md focus:ring focus:ring-indigo-500 transition duration-200 ease-in-out"
       >

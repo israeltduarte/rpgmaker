@@ -1,9 +1,9 @@
 "use client";
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { ITCharacter } from "../lib/definitions";
-import { useRouter } from "next/navigation";
 
 interface CharacterContextProps {
   characters: ITCharacter[];
@@ -19,11 +19,11 @@ interface CharacterContextProps {
   setIsEditingCharacter: (editing: boolean) => void;
   setSearchTerm: (searchTerm: string) => void;
   setDebouncedSearchTerm: (debouncedSearchTerm: string) => void;
-
   handleAddCharacter: (character: ITCharacter) => void;
   handleUpdate: () => Promise<void>;
   handleDeleteCharacter: () => Promise<void>;
-  handleSearchCharacters: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSelectCharacter: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleSearchCharacter: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleFieldChange: <K extends keyof ITCharacter>(field: K, value: ITCharacter[K]) => void;
   handleCloseCharacterDetails: () => void;
   handleEditCharacter: () => void;
@@ -74,6 +74,12 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         [field]: value,
       };
     });
+  };
+
+  const handleSelectCharacter = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const characterId = event.target.value;
+    const character = characters.find((char) => char.id === characterId);
+    setSelectedCharacter(character || null);
   };
 
   const handleAddCharacter = async (character: ITCharacter) => {
@@ -131,7 +137,7 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   };
 
-  const handleSearchCharacters = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchCharacter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
@@ -169,7 +175,7 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setLoading,
         setSearchTerm,
         setDebouncedSearchTerm,
-        handleSearchCharacters,
+        handleSearchCharacter,
         setIsEditingCharacter,
         handleFieldChange,
         handleCloseCharacterDetails,
@@ -180,6 +186,7 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         handleCardClick,
         handleCharacterChange,
         handleAddCharacter,
+        handleSelectCharacter,
         resetSelectedCharacter,
       }}
     >

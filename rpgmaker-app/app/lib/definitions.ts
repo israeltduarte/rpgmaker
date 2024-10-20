@@ -106,6 +106,12 @@ export interface CityCardProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
+export interface CharacterCardProps {
+  character: ITCharacter;
+  isSelected: boolean;
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
+
 export interface ITTodo {
   id: string;
   name: string;

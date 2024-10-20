@@ -6,22 +6,18 @@ const CharacterSelector = () => {
   const {
     characters,
     selectedCharacter,
-    setSelectedCharacter
+    searchTerm,
+    handleCharacterChange,
+    handleSearchCharacter,
   } = useCharacterContext();
 
-  const handleSelectCharacter = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const characterId = event.target.value;
-    const character = characters.find((char) => char.id === characterId);
-    setSelectedCharacter(character || null);
-  };
-
   return (
-    <div className="mb-4">
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Selecione um Personagem</label>
+
+    <div className="mb-6 flex items-center gap-4 dark:bg-gray-800 p-6 rounded-lg shadow-lg">
       <select
         value={selectedCharacter?.id || ""}
-        onChange={handleSelectCharacter}
-        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+        onChange={handleCharacterChange}
+        className="text-gray-600 border border-gray-300 rounded-lg p-3 w-full max-w-xs bg-gray-100 shadow-md focus:ring focus:ring-indigo-500 transition duration-200 ease-in-out"
       >
         <option value="">Escolher personagem...</option>
         {characters.map((character) => (
@@ -30,6 +26,14 @@ const CharacterSelector = () => {
           </option>
         ))}
       </select>
+
+      <input
+        type="text"
+        placeholder="Pesquisar cidades..."
+        value={searchTerm}
+        onChange={handleSearchCharacter}
+        className="text-gray-900 border border-gray-300 rounded-lg p-3 w-full bg-gray-100 shadow-md focus:ring focus:ring-indigo-500 transition duration-200 ease-in-out"
+      />
     </div>
   );
 };

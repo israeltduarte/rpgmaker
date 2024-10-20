@@ -7,9 +7,7 @@ const CharacterDetailsView = () => {
     selectedCharacter
   } = useCharacterContext();
 
-  if (!selectedCharacter) {
-    return <div>Nenhum personagem selecionado.</div>;
-  }
+  if (!selectedCharacter) return null;
 
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
