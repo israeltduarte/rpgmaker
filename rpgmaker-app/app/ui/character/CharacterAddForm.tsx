@@ -2,8 +2,8 @@ import { useCharacterContext } from "@/app/context/CharacterContext";
 import { ITCharacter, ITCharacterTypeEnum } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FormField from "../city/CityFormField";
-import FormTextarea from "../city/CityFormTextArea";
+import FormField from "../utils/FormField";
+import FormTextarea from "../utils/FormTextArea";
 
 const CharacterAddForm = () => {
   const {

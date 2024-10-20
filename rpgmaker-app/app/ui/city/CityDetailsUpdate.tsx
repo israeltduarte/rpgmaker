@@ -2,8 +2,8 @@ import { useCityContext } from "@/app/context/CityContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 import CityDetailsButtons from "./CityDetailsButtons";
-import FormField from "./CityFormField";
-import FormTextarea from "./CityFormTextArea";
+import FormField from "../utils/FormField";
+import FormTextarea from "../utils/FormTextArea";
 
 const CityDetailsUpdate = () => {
   const {

@@ -2,8 +2,8 @@ import { useCityContext } from "@/app/context/CityContext";
 import { ITCity } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FormField from "./CityFormField";
-import FormTextarea from "./CityFormTextArea";
+import FormField from "../utils/FormField";
+import FormTextarea from "../utils/FormTextArea";
 
 const CityAddForm = () => {
   const {
