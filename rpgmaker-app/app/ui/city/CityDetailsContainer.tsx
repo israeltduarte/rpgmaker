@@ -6,12 +6,14 @@ import CityDetailsView from "./CityDetailsView";
 const CityDetailsContainer = () => {
   const {
     isEditingCity,
-    setSelectedCity
+    setSelectedCity,
+    setSearchTerm,
   } = useCityContext();
 
   useEffect(() => {
     setSelectedCity(null);
-  }, [setSelectedCity]);
+    setSearchTerm("");
+  }, [setSelectedCity, setSearchTerm]);
 
   return (
     isEditingCity ? <CityDetailsUpdate /> : <CityDetailsView />

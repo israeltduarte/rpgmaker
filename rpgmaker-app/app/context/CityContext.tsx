@@ -88,7 +88,6 @@ export const CityProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-
   const handleAddCity = async (city: ITCity) => {
     if (city) {
       try {
