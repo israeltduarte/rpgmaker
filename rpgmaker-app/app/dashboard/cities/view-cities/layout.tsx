@@ -1,4 +1,3 @@
-
 export default function ViewCitiesLayout({ children }: { children: React.ReactNode }) {
   return (
     <>

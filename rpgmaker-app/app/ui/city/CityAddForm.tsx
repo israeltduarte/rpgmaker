@@ -5,7 +5,7 @@ import { useState } from "react";
 import FormField from "./CityFormField";
 import FormTextarea from "./CityFormTextArea";
 
-export default function CityAddForm() {
+const CityAddForm = () => {
   const {
     handleAddCity
   } = useCityContext();
@@ -183,3 +183,5 @@ export default function CityAddForm() {
     </div>
   );
 }
+
+export default CityAddForm;

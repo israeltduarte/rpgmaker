@@ -10,12 +10,13 @@ export interface ITCharacter {
   name: string;
   type: ITCharacterTypeEnum;
   tendency: string;
-  reward: number;
+  reward: string;
   goal: string;
   isRival: boolean;
   playerName: string;
   power?: ITPower;
   notes: string[];
+  updated: string;
 }
 
 export enum ITCharacterTypeEnum {
@@ -102,7 +103,7 @@ export interface FormTextareaProps {
 export interface CityCardProps {
   city: ITCity;
   isSelected: boolean;
-  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void; // Correção aqui!
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export interface ITTodo {

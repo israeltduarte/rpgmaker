@@ -1,6 +1,6 @@
 import { FormTextareaProps } from "@/app/lib/definitions";
 
-const CityFormTextarea: React.FC<FormTextareaProps> = ({ label, name, value, onChange, placeholder = "", required = false }) => {
+const FormTextarea: React.FC<FormTextareaProps> = ({ label, name, value, onChange, placeholder = "", required = false }) => {
   return (
     <>
       <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -19,4 +19,4 @@ const CityFormTextarea: React.FC<FormTextareaProps> = ({ label, name, value, onC
   );
 }
 
-export default CityFormTextarea;
+export default FormTextarea;

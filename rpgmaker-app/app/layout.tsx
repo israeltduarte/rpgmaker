@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { CharacterProvider } from "./context/CharacterContext";
 import { CityProvider } from "./context/CityContext";
 import { UtilsProvider } from "./context/UtilsContext";
 import "./ui/globals.css";
@@ -30,11 +31,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CityProvider>
-          <UtilsProvider>
-            {children}
-          </UtilsProvider>
-        </CityProvider>
+        <CharacterProvider>
+          <CityProvider>
+            <UtilsProvider>
+              {children}
+            </UtilsProvider>
+          </CityProvider>
+        </CharacterProvider>
       </body>
     </html>
   );
